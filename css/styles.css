@@ -1,0 +1,33 @@
+body {
+	font-family: 'Lato', sans-serif;
+	color: #747704;
+	font-weight: 300;
+}
+.text-muted {
+	color :#BCBBBB;
+}
+.text-thin {
+	font-weight: 100;
+}
+
+.lineStyle {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+
+
+.title-super {
+	font-size: 60px;
+}
+
+#face {
+	margin-top: 20px;
+	!border-radius:50%;
+}
+
+#footer {
+
+}
