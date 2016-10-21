@@ -38,6 +38,7 @@ body {
 	!border-radius:50%;
 }
 
-#hangman {
-	height: 140px;
+#hangmanpic {
+	padding-top:30px;
+	padding-bottom:30px;
 }
