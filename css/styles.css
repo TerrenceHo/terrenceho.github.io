@@ -17,10 +17,12 @@ body {
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-
-
 .title-super {
 	font-size: 60px;
+}
+
+.zoom:hover {
+	zoom: 2;
 }
 
 #face {
@@ -28,6 +30,3 @@ body {
 	!border-radius:50%;
 }
 
-#footer {
-
-}
