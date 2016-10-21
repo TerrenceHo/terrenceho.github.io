@@ -38,3 +38,6 @@ body {
 	!border-radius:50%;
 }
 
+#hangman {
+	vertical-align: middle;
+}
