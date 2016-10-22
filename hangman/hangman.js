@@ -163,20 +163,22 @@ function chooseCategory(num){
 }
 
 function guessAnswer(){
-	console.log('lmo');
 	let f = document.guess_form;
 	let b = f.elements["input_answer"];
 	let guess = b.value.toUpperCase();
-	if(count > 6){
-		window.alert("Uh...I guess you're dead now. The correct word was " + answer);
-	} else if (guess === answer){
-		spaces = chosen;
-		window.alert("You guessed the right answer.  You win!")
-	} else {
+
+	if(guess !== answer){
 		count++;
-		hangman.src = "http://www.writteninpencil.de/Projekte/Hangman/hangman" + count + ".png";
-		window.alert("Wrong guess, try again!");
-	}
+		if (count > 6){
+		hangman.src = "http://www.writteninpencil.de/Projekte/Hangman/hangman0.png";
+		window.alert("Uh...I guess you're dead now. The correct word was " + answer);
+		} else {
+			hangman.src = "http://www.writteninpencil.de/Projekte/Hangman/hangman" + count + ".png";
+			window.alert("Wrong guess, try again!");
+		}	
+	} else if (guess === answer){
+		window.alert("You guessed the right answer.  You win!")
+	} 
 	b.value = "";
 }
 
