@@ -79,13 +79,11 @@ $(document).ready(function(){
             setTimeout(function(){
                 drawFace.play(d);
             },800);
-            console.log("d = " + d);
-            console.log("e = " + e);
 	    }
         else if(d === -1 && e === -1){
-            drawBear.play(d);
-            console.log("d = " + d);
-            console.log("e = " + e);
+            setTimeout(function() {
+                drawBear.play(d);
+            }, 2000);
             e *= -1;
         }
   	});
@@ -94,18 +92,15 @@ $(document).ready(function(){
         d *= -1;
         console.log("First d = " + d);
         if(d === -1 && e === 1){
-            drawFace.play(d);
-            console.log("d = " + d);
-            console.log("e = " + e);
+            setTimeout(function() {
+                drawFace.play(d);
+            }, 2000);
             e *= -1;
     	}  
         else if ( d === 1 && e === -1){
             setTimeout(function(){
                 drawBear.play(d);
             },800);
-            console.log("drawing bear");
-            console.log("d = " + d);
-            console.log("e = " + e);
         }
   	});
 });
