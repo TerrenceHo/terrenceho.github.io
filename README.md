@@ -1,3 +1,3 @@
-# My website.
+# My Blog
 
-Made with hyde jekyll. If you ask me about my configs I probably forgot.
+Made with Hyde Jekyll.  Serves as a place to put down my writings
