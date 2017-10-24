@@ -1,0 +1,27 @@
+# Dependencies
+markdown:           kramdown
+highlighter:        pygments
+
+# Permalinks
+permalink:          pretty
+
+# Setup
+title:              Terrence Ho
+tagline:            'CS Blog'
+description:        'Blog relating to math, backend dev, and general CS.'
+url:                https://terrenceho.github.io
+baseurl:            ''
+email:              terrenceho.books@gmail.com
+
+author:
+  name:             'Terrence Ho'
+
+paginate:           10
+
+# Custom vars
+version:            0.0.1
+
+github:             https://github.com/TerrenceHo
+
+gems:
+  # - jekyll-archives
