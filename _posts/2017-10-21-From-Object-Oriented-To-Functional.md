@@ -3,7 +3,7 @@ published: true
 title: From Object Oriented To Functional
 use_math: true
 category: Functional
-layout: default
+layout: post
 ---
 # Using Functional Programming to Encapsulate Behavior
 
