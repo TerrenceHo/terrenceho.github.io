@@ -8,7 +8,7 @@ permalink:          pretty
 # Setup
 title:              Terrence Ho
 tagline:            'CS Blog'
-description:        'Blog relating to math, backend dev, and general CS.'
+description:        'Blog of a machine learning enthusiast and open source software engineer'
 url:                https://terrenceho.github.io
 baseurl:            ''
 email:              terrenceho.books@gmail.com
