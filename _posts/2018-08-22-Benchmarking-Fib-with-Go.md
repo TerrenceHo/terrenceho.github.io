@@ -7,9 +7,9 @@ layout: post
 ---
 
 
-Go has a really nice testing suite built into it's compiler tool chains. It's as
+Go has a really nice testing suite built into its compiler tool chains. It's as
 simple as running `go test` in your package, and all files marked \*\_tests.go
-will be executed. We can also run benchmarks with during testing, by adding the 
+will be executed. We can also run benchmarks during testing, by adding the 
 `-bench` flag to the `go test` command. I never really benchmarked anything 
 before, so I decided to explore Go's benchmarking utilities, and flex some of my 
 algorithm skills in the process. Naturally I decided implement the Fibonacci sequence many, many times over. 
@@ -197,8 +197,8 @@ func fibMultiply(F *[2][2]int, M *[2][2]int) {
 For the unintiated, this algorithm looks a rather complicated. It utilizes 2x2
 matrix multiplication, and it is not immediately obvious how matrix
 multiplcation can help solve the Fibonacci sequence. We shall prove the
-following theorem, where $$F_{n}$$ represents the Fibonacci sequence at step
-$n$.
+following theorem using induction, where $$F_{n}$$ represents the Fibonacci 
+sequence at step $n$.
 
 $$
 M = 
@@ -412,10 +412,14 @@ $$
 \end{array} \right)
 $$
 
-Because we half the work necessary each matrix multiplcation, this qualifies as
+Because we halve the work necessary each matrix multiplcation, this qualifies as
 a $O(log_n)$ implementation. However, that does not mean it's automatically faster
 than the linear implementations. Due to the overhead in matrix multiplcation, it
 is actually slower for low values of $n$, which on my computer was $n<1024$.
+
+In terms of memory usage, because we reuse the same matrices, and do not store
+all past cached values, the memory usage can be considered linear, with the
+exception of the recursive calls.
 
 ### Benchmarks 
 
@@ -487,4 +491,8 @@ still be used.
 
 ### Conclusion
 Well, we've learned to benchmark programs in Go, and tested out real world
-implications of complexity analysis. Good algorithms do really matter after all.
+implications of complexity analysis. We can achieve real performance gains with
+the fast exponentiation algorithm, but the overhead in calculating matrices
+drags the the runtime for lower orders of $n$. Thus, it can be advisable in real
+world systems to choose your algorithm depending on the value of $n$. 
+Good algorithms do really matter after all.
