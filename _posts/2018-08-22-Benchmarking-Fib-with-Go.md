@@ -12,12 +12,13 @@ simple as running `go test` in your package, and all files marked \*\_tests.go
 will be executed. We can also run benchmarks during testing, by adding the 
 `-bench` flag to the `go test` command. I never really benchmarked anything 
 before, so I decided to explore Go's benchmarking utilities, and flex some of my 
-algorithm skills in the process. Naturally I decided implement the Fibonacci sequence many, many times over. 
+algorithm skills in the process. Naturally I decided implement the Fibonacci 
+sequence many, many times over. 
 
 The repository lies at <https://github.com/TerrenceHo/fib>, where you can 
 use git to clone it.  You can also use `go get github.com/TerrenceHo/fib` 
 if you have a go runtime, which you'll need to run tests.  The file 
-`fib.go` holds various fibconacci implementations and some documentation.  
+`fib.go` holds various fibconacci implementations and some documentation. 
 The associated tests and benchmarks lie in `fib_test.go`. To run the benchmarks,
 use `go test -bench=.`. To just run the tests, use `go test .` My benchmarks are
 at the bottom of the article, but we refer to these benchmarks multiple times in
@@ -82,7 +83,7 @@ computation tree.
 ![fibtree5Linear]({{ "/assets/fibtree5Linear.png" | absolute_url }})
 
 `FibRecursiveCache` recurses from $n$ to 1, and then builds the cache 
-going backwards.  The left-most value in our array holds our final answer.
+going backwards.  The right-most value in our array holds our final answer.
 `FibRecursiveCache` ends up with both a linear runtime and linear memory 
 usage, due to the array cache.  
 

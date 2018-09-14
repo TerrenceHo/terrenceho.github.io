@@ -23,6 +23,6 @@ who checked my models weren't predicting the wrong things (it happened several t
 helped me think like a data engineer.
 
 ## Contact Me
-[Email](mailto:terrenceho.books@gmail.com)
+[Email](mailto:terrenceho.io@gmail.com)
 [LinkedIn](https://www.linkedin.com/in/terrence-ho/){:target="_blank"}
 [GitHub](https://github.com/TerrenceHo){:target="_blank"}
