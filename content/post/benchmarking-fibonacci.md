@@ -1,9 +1,10 @@
 ---
-published: true
 title: Benchmarking Fib with Go
-use_math: true
-category: Go
-layout: post
+date: 2018-08-22
+tags: ["go", "fibonacci", "benchmark"]
+draft: false
+math: true
+markup: mmark
 ---
 
 
@@ -26,7 +27,7 @@ our discussion. I encourage you to try these benchmarks for yourselves.
 
 ### FibRecursive: Exponential Recursive
 
-``` 
+```go
 func FibRecursive(n int) int {
     if n < 2 {
         return n
@@ -36,15 +37,15 @@ func FibRecursive(n int) int {
 ``` 
 
 The most basic Fib sequence algorithm known to man, `FibRecursive` boasts
-a mighty exponential $O(2^n)$ run time, and is so slow I can't even run
+a mighty exponential \\(O(2^n)\\) run time, and is so slow I can't even run
 `FibRecursive(64)` on my laptop without having to wait for an eternity.  
-The reason being, for an input $n$, $n+1$ takes almost twice as long to 
+The reason being, for an input \\(n\\), \\(n+1\\) takes almost twice as long to 
 computer, since the recursive tree makes two recursive calls each level 
 and doubles the computation need for the next level.  
 
-![fibtree5]({{ "/assets/fibtree5.png" | absolute_url }})
+![fibtree5](/img/fibtree5.png")
 
-In our testing suite, we max our runtimecalls at $n$=32. Memory-wise, 
+In our testing suite, we max our runtimecalls at \\(n=32\\). Memory-wise, 
 `FibRecursive` is also inefficient, since each function call
 creates adds to the function call stack, and so runs the danger of 
 actually running out of memory at high inputs.
@@ -54,7 +55,7 @@ show slightly more optimized versions.
 
 ### FibRecursiveCache: Exponential Recursive Cache 
 
-``` 
+```go
 func FibRecursiveCache(n int) int {
     cache := make([]int, n+1, n+1) 
     fibRecursiveCache(n, &cache) 
@@ -77,12 +78,12 @@ We notice from the previous expanded `FibRecursive` tree that many values are
 computed many times (i.e. `FibRecursive(2)` is computed thrice). What if 
 we compute these values once, and then store it? We can optimize our previous 
 algorithm by caching previous computed values in an array. In doing so, we 
-lower our runtime from exponential to linear $O(n)$, since we cut off most of the
+lower our runtime from exponential to linear \\(O(n)\\), since we cut off most of the
 computation tree.
 
-![fibtree5Linear]({{ "/assets/fibtree5Linear.png" | absolute_url }})
+![fibtree5Linear](/img/fibtree5Linear.png")
 
-`FibRecursiveCache` recurses from $n$ to 1, and then builds the cache 
+`FibRecursiveCache` recurses from \\(n\\) to 1, and then builds the cache 
 going backwards.  The right-most value in our array holds our final answer.
 `FibRecursiveCache` ends up with both a linear runtime and linear memory 
 usage, due to the array cache.  
@@ -96,7 +97,7 @@ values. We can make do with just the previous two, leading us to...
 
 ### FibIterative: Linear Iterative Implementation 
 
-``` 
+```go 
 func FibIterative(n int) int {
     var temp int 
     first := 0 
@@ -125,7 +126,7 @@ implementation is faster.
 
 ### FibTailRecursive: Tail Recursive Implementation
 
-``` 
+```go 
 func FibTailRecursive(n int) int {
     return fibTailRecursive(n, 0, 1)
 }
@@ -157,7 +158,7 @@ sequence.
 
 ### FibPowerMatrix: Linear Matrix Implementation 
 
-``` 
+```go
 func FibPowerMatrix(n int) int {
     F := [2][2]int{
         [2]int{1, 1}, 
@@ -195,116 +196,42 @@ func fibMultiply(F *[2][2]int, M *[2][2]int) {
 }
 ```
 
-For the unintiated, this algorithm looks a rather complicated. It utilizes 2x2
-matrix multiplication, and it is not immediately obvious how matrix
+For the unintiated, this algorithm looks a rather complicated. It utilizes
+\\(2x2\\) matrix multiplication, and it is not immediately obvious how matrix
 multiplcation can help solve the Fibonacci sequence. We shall prove the
-following theorem using induction, where $$F_{n}$$ represents the Fibonacci 
-sequence at step $n$.
+following theorem using induction, where \\(F_{n}\\) represents the Fibonacci
+sequence at step \\(n\\).
 
-$$
-M = 
-\left( \begin{array}{ccc}
-F_{n+1} & F_{n} \\
-F_{n} & F_{n-1} \\
-\end{array} \right)
-=
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^n
-$$
+$$ M = \left( \begin{array}{ccc} F_{n+1} & F_{n} \\ F_{n} & F_{n-1} \\ \end{array} \right) = \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n $$
 
-For $n=1$, 
+For \\(n=1\\), 
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^1
-= 
-\left( \begin{array}{ccc}
-F_{2} & F_{1} \\
-F_{1} & F_{0} \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^1 = \left( \begin{array}{ccc} F_{2} & F_{1} \\ F_{1} & F_{0} \\ \end{array} \right) $$
 
 Which is obvious, these are the first three values in the Fibonacci sequence,
-\((1, 1, 0\)).
+\\(1, 1, 0\\).
 
-Assume that this step holds for $n=k$.
+Assume that this step holds for \\(n=k\\).
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^k
-= 
-\left( \begin{array}{ccc}
-F_{k+1} & F_{k} \\
-F_{k} & F_{k-1} \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^k =  \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) $$
 
-Now we attempt to prove that the statement still holds for $n=k+1$, and so the
+Now we attempt to prove that the statement still holds for \\(n=k+1\\), and so the
 statement would be solved. We multiple both sides by 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) $$
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^k
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)
-= 
-\left( \begin{array}{ccc}
-F_{k+1} & F_{k} \\
-F_{k} & F_{k-1} \\
-\end{array} \right)
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^k \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) =  \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) $$
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^{k+1}
-= 
-\left( \begin{array}{ccc}
-F_{k+1} + F_{k} & F_{k+1} \\
-F_{k} F_{k-1} & F_{k} \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k+1} =  \left( \begin{array}{ccc} F_{k+1} + F_{k} & F_{k+1} \\ F_{k} F_{k-1} & F_{k} \\ \end{array} \right) $$
 
 This implies that
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^{k+1}
-= 
-\left( \begin{array}{ccc}
-F_{k+2} & F_{k+1} \\
-F_{k+1} & F_{k} \\
-\end{array} \right)
-$$
+ $$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k+1} =  \left( \begin{array}{ccc} F_{k+2} & F_{k+1} \\ F_{k+1} & F_{k} \\ \end{array} \right) $$
 
-Thus, by proof by induction, our assumption holds true for any $n=k+1$. This is
+Thus, by proof by induction, our assumption holds true for any \\(n=k+1\\). This is
 basically a simple way to increment the Fibonacci sequence once every matrix
 multiplcation. We calculate the matrices in a loop, similiar to our tail
-recursive implementation. Our final answer will be held in the $F_{k+2}$ after
-$n$ iterations.
+recursive implementation. Our final answer will be held in the \\(F_{k+2}\\) after
+\\(n\\) iterations.
 
 However, this is still a linear runtime implementation. Worse, since matrix
 muliplication involves more operations, it is slower than most of our other
@@ -313,7 +240,7 @@ massive speed boost.
 
 ### FibPowerMatrixRecursive: Log\((n\)) Matrix Implementation 
 
-``` 
+```go
 func FibPowerMatrixRecursive(n int) int {
     F := [2][2]int{
         [2]int{1, 1}, 
@@ -346,26 +273,22 @@ func fibPowerRecursive(F *[2][2]int, n int) {
 `FibPowerMatrixRecursive` is pretty similiar to the previous implementation.
 However, it uses exponentiation to calculate matrices, rather than simply
 multipling the previous result to 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^{k}
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k} $$
 
-Ignoring matrices for now, consider calculating 2^8.  We can compute that as 
-$2 * 2 * 2 * 2 * 2 * 2 * 2 * 2$, and multiple across, which would require 7 
-multiplication operations. However, you can achieve the same result by using 
-$4 * 4 * 4 * 4$, and $2 * 2 = 4$. So we can multiply $2 * 2$ once to get $4$, and
-then use that result to finish the calculation. But we can do that previous step
-multiple times, and so $4 * 4 = 16$, $16 * 16 = 256 = 2^8$. So rather than 7
-multiplcation steps, we achieved the same result with 3 steps.
+Ignoring matrices for now, consider calculating 2^8.  We can compute that as
+\\(2 * 2 * 2 * 2 * 2 * 2 * 2 * 2\\), and multiple across, which would require 7
+multiplication operations. However, you can achieve the same result by using
+\\(4 * 4 * 4 * 4\\), and \\(2 * 2 = 4\\). So we can multiply \\(2 * 2\\) once to
+get \\(4\\), and then use that result to finish the calculation. But we can do
+that previous step multiple times, and so \\(4 * 4 = 16\\), \\(16 * 16 = 256 =
+2^8\\). So rather than 7 multiplcation steps, we achieved the same result with 3
+steps.
 
-$2*2 = 4$
+\\(2*2 = 4\\)
 
-$4*4 = 16$
+\\(4*4 = 16\\)
 
-$16 * 16 = 256$
+\\(16 * 16 = 256\\)
 
 This formula is known as the fast exponentiation formula. It brings
 exponentiation from a linear runtime to a logarithmic runtime, which halves the
@@ -373,50 +296,18 @@ amount of work every iteration. We can apply the same logic to matrices,
 squaring the matrices every iteration rather than simply multiplying straight
 across. In math notation, this would look something like:
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^n
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^n
-=
-\left( \begin{array}{ccc}
-F_{k+1} & F_{k} \\
-F_{k} & F_{k-1} \\
-\end{array} \right)
-\left( \begin{array}{ccc}
-F_{k+1} & F_{k} \\
-F_{k} & F_{k-1} \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n = \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) $$
 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)^{2n}
-=
-\left( \begin{array}{ccc}
-F^2_{k+1} + F^2_{k} & F_{k+1}F_{k} + F_{k}F_{k-1} \\
-F_{k+1}F_{k} + F_{k}F_{k-1} & F^2_{k} + F^2_{k-1} \\
-\end{array} \right)
-$$
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{2n} = \left( \begin{array}{ccc} F^2_{k+1} + F^2_{k} & F_{k+1}F_{k} + F_{k}F_{k-1} \\ F_{k+1}F_{k} + F_{k}F_{k-1} & F^2_{k} + F^2_{k-1} \\ \end{array} \right) $$
 
-If $n$ was odd, then we would multiply once more by 
-$$
-\left( \begin{array}{ccc}
-1 & 1 \\
-1 & 0 \\
-\end{array} \right)
-$$
+If \\(n\\) was odd, then we would multiply once more by 
+$$ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) $$
 
 Because we halve the work necessary each matrix multiplcation, this qualifies as
-a $O(log_n)$ implementation. However, that does not mean it's automatically faster
+a \\(O(log_n)\\) implementation. However, that does not mean it's automatically faster
 than the linear implementations. Due to the overhead in matrix multiplcation, it
-is actually slower for low values of $n$, which on my computer was $n<1024$.
+is actually slower for low values of \\(n\\), which on my computer was
+\\(n<1024\\).
 
 In terms of memory usage, because we reuse the same matrices, and do not store
 all past cached values, the memory usage can be considered linear, with the
@@ -424,9 +315,9 @@ exception of the recursive calls.
 
 ### Benchmarks 
 
-We test our benchmarks on values $Fib(n)$, where 
-$n = {1,2,4,8,16,32,64,128,1024}$ (except for `FibTestRecursive`, we stop at 
-$n=32$ because any higher values of $n$ simply takes too long to run).
+We test our benchmarks on values \\(Fib(n)\\), where \\(n =
+{1,2,4,8,16,32,64,128,1024}\\) (except for `FibTestRecursive`, we stop at
+\\(n=32\\) because any higher values of \\(n\\) simply takes too long to run).
 
 Here are the benchmarks on for `fib` on my computer.
 
@@ -486,14 +377,14 @@ BenchmarkFibPowerMatrixRecursive1024-8  10000000    187  ns/op
 
 The two noteworthy are `BenchmarkFibPowerMatrixRecursive1024-8` and
 `BenchmarkFibIterative1024-8`, which clocked in at 187 ns/op and 621 ns/op,
-showing that as ${n\to\infty}$, the $O(log_n)$ implementation does indeed scale
-better. However, at lower values of $n$, the iterative implementation should
-still be used.
+showing that as \\({n\to\infty}\\), the \\(O(log_n)\\) implementation does
+indeed scale better. However, at lower values of \\(n\\), the iterative
+implementation should still be used.
 
 ### Conclusion
 Well, we've learned to benchmark programs in Go, and tested out real world
 implications of complexity analysis. We can achieve real performance gains with
 the fast exponentiation algorithm, but the overhead in calculating matrices
-drags the the runtime for lower orders of $n$. Thus, it can be advisable in real
-world systems to choose your algorithm depending on the value of $n$. 
+drags the the runtime for lower orders of \\(n\\). Thus, it can be advisable in real
+world systems to choose your algorithm depending on the value of \\(n\\). 
 Good algorithms do really matter after all.
