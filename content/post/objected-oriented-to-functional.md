@@ -1,9 +1,10 @@
 ---
-published: true
 title: From Object Oriented To Functional
-use_math: true
-category: Functional
-layout: post
+date: 2017-10-21
+tags: ["python", "functional programming"]
+draft: false
+markup: mmark
+math: true
 ---
 
 Many coders have heard of the term "functional programming", but have often never really used it or its properties.  Especially if they came from Java, where there are no real functions, only methods each function has to be attached to an object, and cannot stand by itself. Functions are commomly thought of as defining behavior. However, functions can also be thought of as data, instead of just instructions.  They are data that define your instructions.
