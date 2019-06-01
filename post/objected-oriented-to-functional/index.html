@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>From Object Oriented To Functional</title>
+        
+        <link rel="icon" href="https://terrenceho.org/favicon.ico">
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://terrenceho.org/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.55.6" />
+        
+
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">From Object Oriented To Functional</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:terrenceho.books@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/TerrenceHo/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/terrence-ho/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/objected-oriented-to-functional/">From Object Oriented To Functional</a></h4>
+    <h5>October 21, 2017</h5>
+    
+    <a href="https://terrenceho.orgtags/python"><kbd class="item-tag">python</kbd></a>
+    
+    <a href="https://terrenceho.orgtags/functional-programming"><kbd class="item-tag">functional programming</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>Many coders have heard of the term &quot;functional programming&quot;, but have often never really used it or its properties.  Especially if they came from Java, where there are no real functions, only methods each function has to be attached to an object, and cannot stand by itself. Functions are commomly thought of as defining behavior. However, functions can also be thought of as data, instead of just instructions.  They are data that define your instructions.</p>
+
+<p>You can manipulate functions like other types of data.  You can pass it around, alter functions, and use functions to manipulate other data.  If you were to think of functions as data, limitations like having to attach a method to an object to define behavior goes away.</p>
+
+<p>In this first blog post, we shall experiment with treating functions as data that can define behavior.  To give an example of this, we will implement a calculator.  We will start with a more object oriented version to contrast object oriented vs functional, and then progressively replace functionality of the calculator with functional parts, while maintaining the same overall goal of having a calculator.</p>
+
+<p>We want it to be able to Add, Subtract, and Multiply.  Let's define a <em>Calculator</em> object to hold our accumulated value during calculations.  An accumulated value is simply so we can remember the previous value for successive operations.  $1+2=3$, then three is the accumulated value.  Our next operation will use $3$ and a another number.  We'll also define a <em>Do</em> method to compute an action.</p>
+
+<pre><code class="language-python">import math
+
+class Calculator(object):
+    def __init__(self):
+        self.acc = 0.0
+    
+    def Do(self, opt, v):
+        if opt == 'Add':
+            self.acc += v
+        elif opt == 'Sub':
+            self.acc -= v
+        elif opt == 'Mul':
+            self.acc *= v
+        else:
+            print(&quot;Undefined Operation&quot;)
+        
+        return self.acc
+</code></pre>
+
+<p>Above we have defined a <em>Calculator</em> object.  It has a <em>Do</em> method takes in a string <em>opt</em> to determine which operation to conduct, and a value  <em>v</em> float or int.  It currently has three actions, and returns the accumulated value once it is done computing the value. Below is an example of usage.</p>
+
+<pre><code class="language-python">c = Calculator()
+print(c.Do(&quot;Add&quot;, 100))
+print(c.Do(&quot;Sub&quot;, 50))
+print(c.Do(&quot;Mul&quot;, 2))
+</code></pre>
+
+<pre><code>100.0
+50.0
+100.0
+</code></pre>
+
+<p>Our <em>Calculator</em> is quite limited as of right now.  It can't really do much.  If we wanted to add some other functionality to the calculator, such as calculating the square root of the accumulated value, it would require adding another <code>elif</code> to the <em>Do</em> method.</p>
+
+<p>We would have to add another conditional for <em>every</em> operation we wanted to do.  This is not maintainable in the long run, and not user friendly.  If the user wanted to define his or her own operation to use with the calculator, they would have to edit the source code itself.</p>
+
+<p>Let's see if we can move functionality outside of the Do method.  Let's rewrite our calculator a little bit, but this time using a slightly more functional style.</p>
+
+<pre><code class="language-python">class Calculator(object):
+    def __init__(self):
+        self.acc = 0.0
+    
+    def Do(self, opfunc, v):
+        
+        self.acc = opfunc(self.acc, v)
+        return self.acc
+</code></pre>
+
+<p>Now we have changed our calculator a bit.  <em>Do</em> is much simpler now, and takes in two standard parameters, <em>opfunc</em> and <em>v</em>.  What this calculator does is to take in an operation function <em>opfunc</em>, as well as the previous value <em>v</em>.  Whenever Do is called, it calls the operation we pass in, using the accumulated value the Calculator object holds and and value <em>v</em> passed in to compute a value.  For example, an adding function would take</p>
+
+<pre><code>self.acc + v
+</code></pre>
+
+<p>and return the value.</p>
+
+<p>Taking a moment to digest this, the <em>Do</em> method simply takes a function and executes it.  It doesn't take in a number value, but takes a function, evaulates that function using <em>v</em>, and returns the computed value.  The advantage of this is that functionality has moved outside the <em>Do</em> method inside the calculator.  Now the <em>Do</em> method only &quot;does&quot; a function that we supply it.</p>
+
+<p>We can now redefine our previous <em>Add</em>, <em>Sub</em>, and <em>Mul</em> functions.  These are the functions that we pass into <em>Do</em>.  Examples are given below.</p>
+
+<p>New operation functions must follow the schema below.  It requires two numerical inputs and returns one computed value.</p>
+
+<pre><code>def Opt(value_a, value_b):
+    return operation
+</code></pre>
+
+<pre><code class="language-python">def Add(a, b):
+    return a + b
+
+def Sub(a, b):
+    return a - b
+
+def Mul(a, b):
+    return a * b
+</code></pre>
+
+<p>Our <em>Add</em>, <em>Sub</em>, and <em>Mul</em> function all follow the above schema.  Take a moment to verify this.</p>
+
+<p>To use this calculator, all we have to do is pass in the function to the <em>Do</em> method.  This makes it very simple to define new operation functions and utilize them.  Below is an example.  The numerical outputs are still the same as before with the pre-defined if-statements.</p>
+
+<pre><code class="language-python">c = Calculator()
+print(c.Do(Add, 5))
+print(c.Do(Sub, 3))
+print(c.Do(Mul, 8))
+</code></pre>
+
+<pre><code>5.0
+2.0
+16.0
+</code></pre>
+
+<h1 id="extending-the-calculator">Extending the Calculator</h1>
+
+<p>Let's say some user wanted a square root function.  Easy, we just define another function!</p>
+
+<pre><code class="language-python">def Sqrt(a, _):
+    return math.sqrt(a)
+</code></pre>
+
+<p>Here is where our code got a little ugly.  <em>Sqrt</em> doesn't need an extra value <em>v</em> because it only acts on the accumulated value.  Previously, all of our operations required two numbers to use, <em>v</em> and the accumulated value.  This is why we have an underscore variable _ in place of v for the second parameter, because we ignore the input value <em>v</em> anyway.  An example of using <em>Sqrt</em> is below.</p>
+
+<pre><code class="language-python">print(c.Do(Sqrt, 0)) # Last operand ignored
+</code></pre>
+
+<pre><code>4.0
+</code></pre>
+
+<p>The <em>Sqrt</em> function currently requires the user to ignore the second operand, which is a bit clunky.  We should clean this up.</p>
+
+<p>This problem occurs because our defined schema for the <em>Do</em> method is rather restricting. It requires that we have two numerical inputs. What if an operation only needs one parameter like <em>Sqrt</em>?  How about 3 parameters?  With the <em>Sqrt</em> we could just ignore a parameter, but that's more of a hack than a real solution.  And notice that our <em>Sqrt</em> function was really just a wrapper for the <code>math.sqrt(a)</code> from the standard library.  It would be more efficient and cleaner if we could just pass in the <code>math.sqrt(a)</code> function to the <em>Do</em> method instead.</p>
+
+<p>Things get a bit more complicated now.  Let's rewrite our operation functions from a function that takes two parameters and returns a value to a function that returns a function.  This returned function will take a value and return a value.  An example of an <em>Add</em> function is defined below.</p>
+
+<pre><code class="language-python">def Add(v):
+    def operation(acc):
+        return acc + v
+    return operation
+</code></pre>
+
+<p>We also need to update our <em>Do</em> method.  <em>Do</em> now takes in a function that takes in one value and returns a value.</p>
+
+<pre><code class="language-python">class Calculator(object):
+    def __init__(self):
+        self.acc = 0.0
+    
+    def Do(self, opfunc): 
+        self.acc = opfunc(self.acc)
+        return self.acc
+</code></pre>
+
+<p>Why does our <em>Add</em> function return a function?  Here's the cool part about passing around functions as data.  We can modify a function before it is executed.  Let's give an example about how the add function would play out.</p>
+
+<p>Let's try <code>Add(10)</code>.  <em>Add</em> sets <em>v</em> equal to $10$.  It defines a function called <em>operation</em> that takes in a second value <em>acc</em> and adds it to <em>v</em>.  Then add returns <em>operation</em>.</p>
+
+<p>What specifically is returned when we call <code>Add(10)</code>?  The result of the function looks like this</p>
+
+<pre><code>def operation(acc):
+    return acc + 10
+</code></pre>
+
+<p><code>Add(10)</code> returns a function that adds $10$ to <em>acc</em>.  <code>Add(9)</code> would return a function that adds $9$ to <em>acc</em>.</p>
+
+<pre><code>def operation(acc):
+    return acc + 9
+</code></pre>
+
+<p>Let's see how adding works with <em>Do</em> now.</p>
+
+<pre><code class="language-python">c = Calculator()
+print(c.Do(Add(10)))
+print(c.Do(Add(20)))
+</code></pre>
+
+<pre><code>10.0
+30.0
+</code></pre>
+
+<p>When calling <em>Do</em>, we don't call it with the <code>Add</code> function itself, but the result of evaluating <code>Add(10)</code>.  The type of evaluating <code>Add(10)</code> is a function that takes in a value and returning a value. We are calling the operation function that is returned by <code>Add(10)</code>.<br>
+<em>Do</em> then passes in <code>self.acc</code> into the operation function to add $10$ to <code>self.acc</code>.</p>
+
+<p>We can define other functions in a similiar style.  Thus we can easily define other functions like this as well.</p>
+
+<pre><code class="language-python">def Sub(v):
+    def operation(acc):
+        return acc - v
+    return operation
+
+def Mul(v):
+    def operation(acc):
+        return acc * v
+    return operation
+</code></pre>
+
+<pre><code class="language-python">c = Calculator()
+print(c.Do(Add(5)))
+print(c.Do(Sub(3)))
+print(c.Do(Mul(8)))
+</code></pre>
+
+<pre><code>5.0
+2.0
+16.0
+</code></pre>
+
+<p>Now how would we implement <em>Sqrt</em>?  It's quite simple now.</p>
+
+<pre><code class="language-python">def Sqrt():
+    def operation(acc):
+        return math.sqrt(acc)
+    return operation
+
+c = Calculator()
+print(c.Do(Add(5)))
+print(c.Do(Sub(3)))
+print(c.Do(Mul(8)))
+print(c.Do(Sqrt()))
+</code></pre>
+
+<pre><code>5.0
+2.0
+16.0
+4.0
+</code></pre>
+
+<p>Our implementation avoids the awkardness of having to ignore an input variable.  But again <em>Sqrt</em> is just a wrapper of <code>math.sqrt(acc)</code>, so we can simply put that into the calculator instead.</p>
+
+<p>We can get real crazy and also implement different operations with any number of inputs.  Examples below.</p>
+
+<pre><code class="language-python">def Crazy(a, b, c, d, e):
+    def operation(acc):
+        return (((a + b) * d) ** e) + (c * acc )
+    return operation
+
+c = Calculator()
+print(c.Do(Add(5)))
+print(c.Do(Sub(3)))
+print(c.Do(Mul(8)))
+print(c.Do(math.sqrt))
+print(c.Do(math.cos))
+print(c.Do(Crazy(1,2,3,4,5)))
+</code></pre>
+
+<pre><code>5.0
+2.0
+16.0
+4.0
+-0.6536436208636119
+248830.03906913742
+</code></pre>
+
+<h1 id="recap">Recap</h1>
+
+<p>We removed if statements from our <em>Calculator</em> object and went to an object that took in a function to evaluate.  But while this model was more flexible in that functions could be easily defined outside the <em>Calculator</em> and passed in, it could only take in two parameters.</p>
+
+<p>To fix that problem, we adjusted our functions a little bit.  Instead, we created functions that return functions that compute an operation.  This allowed us to</p>
+
+<h1 id="bonus">Bonus</h1>
+
+<p>If we wanted to, we could get rid of the object <em>Calculator</em> and simply have a closure function instead.  This makes our implementation nearly entirely purely functional.  We need the <code>nonlocal</code> statement to indicate that <code>acc</code> is not within the score of the inner function.</p>
+
+<p>Note that because Calculator actually makes sense as an object since it's a noun, it would be better to leave it as an object.  However, this is just to show that closures can take the place of objects and can even be better.</p>
+
+<pre><code class="language-python">def Calculate():
+    acc = 0.0
+    def Do(opfunc): 
+        nonlocal acc
+        acc = opfunc(acc)
+        return acc
+    return Do
+    
+c = Calculate()
+print(c(Add(5)))
+print(c(Sub(3)))
+print(c(Mul(8)))
+print(c(math.cos))
+print(c(Crazy(1,2,3,4,5)))
+</code></pre>
+
+<pre><code>5.0
+2.0
+16.0
+-0.9576594803233847
+248829.12702155902
+</code></pre>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We went from a hard coded layered if statement to a function model, wherein we can pass in any function with any number of parameters to computer an accumulated value.  This kind of abstraction is the kind that can only be offered by functional programming.</p>
+
+<p>Why is this useful?  Well, come see next the next blog post, where we'll go over using functions to define API configurations.</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; Terrence Ho 2017-2019</p>
+
+        </footer>
+       
+    </body>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"</script>
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\[", right: "\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+</html>
+

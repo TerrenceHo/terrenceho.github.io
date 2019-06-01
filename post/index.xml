@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Terrence Ho</title>
+    <link>https://terrenceho.org/post/</link>
+    <description>Recent content in Posts on Terrence Ho</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://terrenceho.org/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Benchmarking Fib with Go</title>
+      <link>https://terrenceho.org/post/benchmarking-fibonacci/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://terrenceho.org/post/benchmarking-fibonacci/</guid>
+      <description>Go has a really nice testing suite built into its compiler tool chains. It&#39;s as simple as running go test in your package, and all files marked *_tests.go will be executed. We can also run benchmarks during testing, by adding the -bench flag to the go test command. I never really benchmarked anything before, so I decided to explore Go&#39;s benchmarking utilities, and flex some of my algorithm skills in the process.</description>
+    </item>
+    
+    <item>
+      <title>From Object Oriented To Functional</title>
+      <link>https://terrenceho.org/post/objected-oriented-to-functional/</link>
+      <pubDate>Sat, 21 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://terrenceho.org/post/objected-oriented-to-functional/</guid>
+      <description>Many coders have heard of the term &amp;quot;functional programming&amp;quot;, but have often never really used it or its properties. Especially if they came from Java, where there are no real functions, only methods each function has to be attached to an object, and cannot stand by itself. Functions are commomly thought of as defining behavior. However, functions can also be thought of as data, instead of just instructions. They are data that define your instructions.</description>
+    </item>
+    
+  </channel>
+</rss>
