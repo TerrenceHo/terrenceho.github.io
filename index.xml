@@ -6,10 +6,19 @@
     <description>Recent content on Terrence Ho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jun 2019 19:20:13 -0700</lastBuildDate>
     
 	<atom:link href="https://terrenceho.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Writing My Blog Posts with Org</title>
+      <link>https://terrenceho.org/pages/org-blog-posts/</link>
+      <pubDate>Sat, 01 Jun 2019 19:20:13 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/pages/org-blog-posts/</guid>
+      <description>Export this first post only by bringing point here and doing M-x org-hugo-export-wim-to-md.</description>
+    </item>
     
     <item>
       <title>Benchmarking Fib with Go</title>

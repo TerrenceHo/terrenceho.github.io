@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Terrence Ho</title>
+    <link>https://terrenceho.org/pages/</link>
+    <description>Recent content in Pages on Terrence Ho</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Jun 2019 19:20:13 -0700</lastBuildDate>
+    
+	<atom:link href="https://terrenceho.org/pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Writing My Blog Posts with Org</title>
+      <link>https://terrenceho.org/pages/org-blog-posts/</link>
+      <pubDate>Sat, 01 Jun 2019 19:20:13 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/pages/org-blog-posts/</guid>
+      <description>Export this first post only by bringing point here and doing M-x org-hugo-export-wim-to-md.</description>
+    </item>
+    
+  </channel>
+</rss>
