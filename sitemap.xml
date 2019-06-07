@@ -3,23 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://terrenceho.org/pages/</loc>
-    <lastmod>2019-06-01T19:20:13-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://terrenceho.org/</loc>
-    <lastmod>2019-06-01T19:20:13-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://terrenceho.org/pages/org-blog-posts/</loc>
-    <lastmod>2019-06-01T19:20:13-07:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://terrenceho.org/post/benchmarking-fibonacci/</loc>
     <lastmod>2018-08-22T00:00:00+00:00</lastmod>
   </url>
@@ -32,6 +15,12 @@
   
   <url>
     <loc>https://terrenceho.org/tags/</loc>
+    <lastmod>2018-08-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://terrenceho.org/</loc>
     <lastmod>2018-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
