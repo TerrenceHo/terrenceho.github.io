@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Terrence Ho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Jun 2019 16:53:00 -0700</lastBuildDate>
     
 	<atom:link href="https://terrenceho.org/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How I Started Using Emacs</title>
+      <link>https://terrenceho.org/post/how-i-started-using-emacs/</link>
+      <pubDate>Mon, 17 Jun 2019 16:53:00 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/post/how-i-started-using-emacs/</guid>
+      <description>This is how I started using GNU Emacs with no prior experience. This is intended to help those who want to start using Emacs as well. I&amp;rsquo;ll start from a base setup, show you where I looked around for help, show you how I found myself using my current configuration. While this post goes through the steps to get started with Emacs, I definitely omitted the steps that didn&amp;rsquo;t help or the parts where I floundered around not knowing what I was doing.</description>
+    </item>
     
     <item>
       <title>Benchmarking Fib with Go</title>
