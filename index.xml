@@ -6,10 +6,20 @@
     <description>Recent content on Terrence Ho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Jun 2019 16:53:00 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jun 2019 18:15:00 -0700</lastBuildDate>
     
 	<atom:link href="https://terrenceho.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Writing My Blog Posts with Org</title>
+      <link>https://terrenceho.org/post/org-blog-posts/</link>
+      <pubDate>Sun, 30 Jun 2019 18:15:00 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/post/org-blog-posts/</guid>
+      <description>Hugo is an awesome blog generator. However, it&amp;rsquo;s primary content mode is Markdown, and writing in org-mode feels much better than writing in Markdown. org-mode can automatically convert to Markdown, but then I have to edit the generated Markdown file to add YAML front-matter that Hugo consumes, which is annoying.
+Enter [[https://ox-hugo.scripter.co/][ox-hugo]]. It allows you to maintain and generate Hugo-compatible Markdown in org-mode, and automatically generates the necessary metadata Hugo requires.</description>
+    </item>
     
     <item>
       <title>How I Started Using Emacs</title>

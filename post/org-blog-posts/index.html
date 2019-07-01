@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Writing My Blog Posts with Org</title>
+        
+        <link rel="icon" href="https://terrenceho.org/favicon.ico">
+        
+        <style>
+
+    html body {
+        font-family: 'Raleway', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://terrenceho.org/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" />
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/emacs-lisp.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.55.6" />
+        
+
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-86036425-2');
+        </script>
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Writing My Blog Posts with Org</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:terrenceho.books@gmail.com" target="_blank"><i class="fas fa-envelope-open"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/TerrenceHo/" target="_blank"><i class="fab fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/terrence-ho/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="/terrencehoresume.pdf" target="_blank"><i class="fas fa-file-alt"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/org-blog-posts/">Writing My Blog Posts with Org</a></h4>
+    <h5>June 30, 2019</h5>
+    
+    <a href="https://terrenceho.orgtags/emacs"><kbd class="item-tag">emacs</kbd></a>
+    
+    <a href="https://terrenceho.orgtags/hugo"><kbd class="item-tag">hugo</kbd></a>
+    
+    <a href="https://terrenceho.orgtags/org"><kbd class="item-tag">org</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>Hugo is an awesome blog generator. However, it&rsquo;s primary content mode is
+Markdown, and writing in <code>org-mode</code> feels much better than writing in Markdown.
+<code>org-mode</code> can automatically convert to Markdown, but then I have to edit the
+generated Markdown file to add YAML front-matter that Hugo consumes, which is
+annoying.</p>
+
+<p>Enter <code>[[https://ox-hugo.scripter.co/][ox-hugo]]</code>. It allows you to maintain and generate Hugo-compatible Markdown
+in <code>org-mode</code>, and automatically generates the necessary metadata Hugo requires.
+However, like all good things in life, you have to work a little to configure it
+to your liking. (What&rsquo;s an extension without spending a couple hours of life
+figuring out exactly how to make it conform to your workflow in the pursuit of
+&ldquo;optimization&rdquo;). This is how I configure <code>ox-hugo</code> to write all my blog posts
+(including this blog post!).</p>
+
+<h2 id="setup">Setup</h2>
+
+<h3 id="installation">Installation</h3>
+
+<p>Install the package <a href="https://ox-hugo.scripter.co/"><code>ox-hugo</code></a>. If you use <code>use-package</code> to manage your packages,
+the following snippet should do the trick.</p>
+
+<pre><code class="language-emacs-lisp">(use-package ox-hugo
+  :ensure t            ;Auto-install the package from Melpa (optional)
+  :after ox)
+</code></pre>
+
+<p>I would recommend going through <code>ox-hugo</code>&rsquo;s documentation for maximum
+effectiveness.</p>
+
+<h3 id="base-directory">Base Directory</h3>
+
+<p>In a Hugo website, you might have a directory structure that looks the following
+layout. From now on, we will refer to this root directory as <code>HUGO_ROOT_DIR</code>.</p>
+
+<pre><code class="language-text">.
+├── config.toml
+├── content
+│   └── post
+│       ├── post1.md
+│       ├── new-post.md
+├── content_org
+│   └── post.org
+├── layouts
+│   └── partials
+├── public
+│   ├── content
+│   │   └── post
+</code></pre>
+
+<p>Note that I have only shown the necessary parts, your actual directory structure
+will have many other files. <code>org</code> doesn&rsquo;t care about Hugo&rsquo;s directory structure,
+so I added a new directory called <code>content-org</code>. This is where I store all my
+<code>org</code> files for the blogs. We only need one <code>org</code> file, named post.org.</p>
+
+<h3 id="global-properties">Global Properties</h3>
+
+<p>Open up <code>$(HUGO_ROOT_DIR)/content_org/post.org</code> in Emacs. At the very top,
+insert the following (replace <code>&lt;your-name=here&gt;</code> with your name).</p>
+
+<pre><code class="language-text">#+AUTHOR: &lt;your-name-here&gt;
+#+HUGO_BASE_DIR: ../
+</code></pre>
+
+<p>This sets the author to be your name, and more importantly sets where
+<code>$(HUGO_ROOT_DIR)</code> is located at. In this case, the root directory is simply the
+parent directory. If your root directory is elsewhere, adjust <code>HUGO_BASE_DIR</code>
+appropriately. Setting <code>HUGO_BASE_DIR</code> is necessary for <code>ox-hugo</code> to set where
+it will be exporting files.</p>
+
+<p>Next, create a headline called Posts. Underneath, add the following properties.</p>
+
+<pre><code class="language-text">* Posts
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: post
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER:
+:END:
+</code></pre>
+
+<p><code>EXPORT_HUGO_SECTION</code> sets the directory under content to generate blog posts.
+Here we&rsquo;ve set the export directory to be post, which corresponds to
+<code>$(HUGO_ROOT_DIR)/content/post</code>. Under <code>EXPORT_HUGO_CUSTOM_FRONT_MATTER</code>, you
+can set other YAML matter that you want to apply to all posts, such as
+configuring BlackFriday options (Hugo&rsquo;s markdown processor).</p>
+
+<h3 id="posts-per-subtree">Posts per Subtree</h3>
+
+<p>We&rsquo;ve now setup the basics of <code>ox-hugo</code>. Next, we will look at how to write a
+blog post.</p>
+
+<p>Most blog posts intuitively are written as one file per post. However, <code>ox-hugo</code>
+allows us to write all of our blog posts in one single file, and export to many
+different files. Thus, all of my blog posts live in
+<code>$(HUGO_ROOT_DIR)/content_org/post.org</code>, and eack blog post is exported as many
+different files under <code>$(HUGO_ROOT_DIR)/content/post/</code>.</p>
+
+<p>The motivation behind this lies with how <code>org-mode</code> lists work. In a <code>org-mode</code>
+list we can set TODO items, and manipulate the entries using <code>org-mode</code>
+shortcuts. Then in a sense, we can think of a blog post as a TODO item, and
+everything underneath the TODO item is the content of the blog post itself. We
+can even mark a blog post as DONE to &ldquo;release&rdquo; it. Below is an example of the
+collapsed view of the Posts tree. There are three blog posts, with one marked
+as DONE, and the rest TODO or IN-PROGRESS. (To collapse a subtree in <code>org-mode</code>,
+press <code>S-TAB</code>. You can then press <code>TAB</code> on the POSTS headline to see
+sub-headlines underneath it.)</p>
+
+<pre><code class="language-text">* Posts
+** TODO Go Essentials Part 1                               :go:go_essentials:⤵
+** IN-PROGRESS Microsoft Internship                    :microsoft:internship:⤵
+** DONE How I started Using Emacs                                 :emcas:org:⤵
+</code></pre>
+
+<p>Thus in a nutshell, we have the Posts top level headline, then TODO items as
+secondary headlines. Each TODO item is a blog post, either finished or
+unfinished. Any content underneath the secondary headlines is part of the actual
+blog post. In the snippet above, I have collapsed the content, leaving only a ⤵
+to indicate there is data underneath the headline. All your blog posts live
+under the Posts subtree. So anytime you want to edit a blog post, you open
+<code>$(HUGO_ROOT_DIR)/content_org/post.org</code> and edit the appropriate subtree.</p>
+
+<h3 id="blog-properties">Blog Properties</h3>
+
+<p>We also want to be able to add some properties to an individual blog post. We
+can do so like this:</p>
+
+<pre><code class="language-text">* Posts
+** TODO Next Blog Post
+:PROPERTIES:
+:EXPORT_FILE_NAME: how-i-started-using-emacs
+:END:
+</code></pre>
+
+<p>This sets the file name to be exported to. There are other properties you can
+set, all detailed in the <code>ox-hugo</code> docs. All the properties are translated to
+Hugo YAML front-matter. In this fashion, <code>ox-hugo</code> allows you to set file
+specific YAML front-matter in an <code>org-mode</code>-like way.</p>
+
+<h3 id="tags">Tags</h3>
+
+<p><code>ox-hugo</code> can also generate the tags in the YAML front-matter. You can set the
+tags in each blog headline such as the following. This saves you the trouble of
+having to write the tabs into the <code>PROPERTIES</code> themselves, since that is
+slightly more troublesome. Additionally, this makes use of <code>org-mode</code> tags,
+allowing <code>org-mode</code> to format your tags nicely.</p>
+
+<pre><code class="language-text">* Posts
+** TODO Next Blog Post                                           :tag1:tag2:
+</code></pre>
+
+<p>These tags allow you to group related posts. Hugo can read these tags and link
+all blog posts with the same tags, so this is a very neat feature.</p>
+
+<h3 id="publishing-a-blog-post">Publishing a Blog Post</h3>
+
+<p>To publish a blog post, set the blog post from TODO to DONE. (For those new to
+<code>org-mode</code>, you can do this by pressing <code>C-c C-t</code>. This should bring up a side
+window that allows you to set the status of the TODO item.) If you have
+configured your <code>org-mode</code> to output a date at which when an item was finished,
+<code>ox-hugo</code> will automatically set that date at the publishing date, which is much
+more convenient than setting the date manually. An example is shown in the
+section below.</p>
+
+<h3 id="putting-it-all-together">Putting it all together</h3>
+
+<p>Here is an example of the Posts subtree along with two blog posts, one finished
+and one unfinished. The finished blog post has a CLOSED timestamp indicating the
+date at which it was finsihed. The unfinished blog post is considered a draft to
+Hugo, and so Hugo won&rsquo;t compile that blog post unless Hugo is set to compile the
+drafts as well.</p>
+
+<pre><code class="language-text">#+AUTHOR: Terrence Ho
+#+HUGO_BASE_DIR: ../
+* Posts
+** TODO Next Blog Post
+:PROPERTIES:
+:EXPORT_FILE_NAME: next-blog-post-name
+:END:
+
+Introductory text... Ipsum Lorem
+
+*** First Headline
+
+More text... Ipsum Lorem
+
+**** First Sub-Headline
+
+Even more text... Ipsum Lorem
+
+** DONE Other Finished Blog Post
+   CLOSED: [2019-06-17 Mon 16:53]
+:PROPERTIES:
+:EXPORT_FILE_NAME: other-finished-blog-post
+:END:
+
+This blog post was finished one Monday, June 17th, 2019.
+</code></pre>
+
+<h2 id="converting-to-markdown">Converting to Markdown</h2>
+
+<p>Lastly, once all this is set up, we will want to convert out posts to Markdown
+files. Luckily, <code>ox-hugo</code> also builds in an exporter to complement <code>org-mode</code>&rsquo;s
+exporting capabilities.</p>
+
+<p>To export a subtree as a post, press <code>C-c C-e</code>. This should bring up a side menu
+detailing all the export methods available to you. Press <code>H H</code> to export the
+subtree as a file (altogether, press <code>C-c C-e H H</code>). <code>ox-hugo</code> determines where
+to export based on the previous settings. You can also export all subtrees at
+once with <code>C-c C-e H A</code>. If you don&rsquo;t use the option to write your blog posts as
+subtrees, but rather one blog post per <code>org</code> file, then use <code>C-c C-e H h</code>, which
+exports everything in the file to Markdown. Personally, I structure my blog
+posts in the subtree style, because of how well it fits the <code>org-mode</code> workflow,
+but YMMV.</p>
+
+<p>The exporting side view looks like the following:</p>
+
+<p><a id="orgcc6d0ea"></a></p>
+
+<figure>
+    <img src="/ox-hugo/org-mode-exporting-view.png"
+         alt="Figure 1: org-mode exporting view"/> <figcaption>
+            <p>Figure 1: <code>org-mode</code> exporting view</p>
+        </figcaption>
+</figure>
+
+
+<h2 id="conclusion-dot">Conclusion.</h2>
+
+<p>I hope you&rsquo;ve enjoyed learning how to write blog posts with <code>org-mode</code>. I&rsquo;ve
+honestly never enjoyed writing Markdown, and so this gives me a convenient and
+fun way to write my future blog posts. Stay tuned for more similiar content!</p>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/how-i-started-using-emacs/">How I Started Using Emacs</a></h4>
+    <h5>June 17, 2019</h5>
+    
+    <a href="https://terrenceho.orgtags/emacs"><kbd class="item-tag">emacs</kbd></a>
+    
+    <a href="https://terrenceho.orgtags/org"><kbd class="item-tag">org</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; Terrence Ho 2017-2019</p>
+
+        </footer>
+       
+    </body>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"</script>
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\[", right: "\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+</html>
+
