@@ -18,7 +18,7 @@
       
       <guid>https://terrenceho.org/post/org-blog-posts/</guid>
       <description>Hugo is an awesome blog generator. However, it&amp;rsquo;s primary content mode is Markdown, and writing in org-mode feels much better than writing in Markdown. org-mode can automatically convert to Markdown, but then I have to edit the generated Markdown file to add YAML front-matter that Hugo consumes, which is annoying.
-Enter [[https://ox-hugo.scripter.co/][ox-hugo]]. It allows you to maintain and generate Hugo-compatible Markdown in org-mode, and automatically generates the necessary metadata Hugo requires.</description>
+Enter ox-hugo. It allows you to maintain and generate Hugo-compatible Markdown in org-mode, and automatically generates the necessary metadata Hugo requires.</description>
     </item>
     
     <item>
