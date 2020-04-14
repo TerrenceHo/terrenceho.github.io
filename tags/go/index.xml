@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on Terrence Ho</title>
+    <link>https://terrenceho.org/tags/go/</link>
+    <description>Recent content in go on Terrence Ho</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://terrenceho.org/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Benchmarking Fib with Go</title>
+      <link>https://terrenceho.org/post/benchmarking-fibonacci/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://terrenceho.org/post/benchmarking-fibonacci/</guid>
+      <description>Go has a really nice testing suite built into its compiler tool chains. It&#39;s as simple as running go test in your package, and all files marked *_tests.go will be executed. We can also run benchmarks during testing, by adding the -bench flag to the go test command. I never really benchmarked anything before, so I decided to explore Go&#39;s benchmarking utilities, and flex some of my algorithm skills in the process.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>org on Terrence Ho</title>
+    <link>https://terrenceho.org/tags/org/</link>
+    <description>Recent content in org on Terrence Ho</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jun 2019 18:15:00 -0700</lastBuildDate>
+    
+	<atom:link href="https://terrenceho.org/tags/org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Writing My Blog Posts with Org</title>
+      <link>https://terrenceho.org/post/org-blog-posts/</link>
+      <pubDate>Sun, 30 Jun 2019 18:15:00 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/post/org-blog-posts/</guid>
+      <description>Hugo is an awesome blog generator. However, it&amp;rsquo;s primary content mode is Markdown, and writing in org-mode feels much better than writing in Markdown. org-mode can automatically convert to Markdown, but then I have to edit the generated Markdown file to add YAML front-matter that Hugo consumes, which is annoying.
+Enter ox-hugo. It allows you to maintain and generate Hugo-compatible Markdown in org-mode, and automatically generates the necessary metadata Hugo requires.</description>
+    </item>
+    
+    <item>
+      <title>How I Started Using Emacs</title>
+      <link>https://terrenceho.org/post/how-i-started-using-emacs/</link>
+      <pubDate>Mon, 17 Jun 2019 16:53:00 -0700</pubDate>
+      
+      <guid>https://terrenceho.org/post/how-i-started-using-emacs/</guid>
+      <description>This is how I started using GNU Emacs with no prior experience. This is intended to help those who want to start using Emacs as well. I&amp;rsquo;ll start from a base setup, show you where I looked around for help, show you how I found myself using my current configuration. While this post goes through the steps to get started with Emacs, I definitely omitted the steps that didn&amp;rsquo;t help or the parts where I floundered around not knowing what I was doing.</description>
+    </item>
+    
+  </channel>
+</rss>

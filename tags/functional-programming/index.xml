@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functional programming on Terrence Ho</title>
+    <link>https://terrenceho.org/tags/functional-programming/</link>
+    <description>Recent content in functional programming on Terrence Ho</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://terrenceho.org/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From Object Oriented To Functional</title>
+      <link>https://terrenceho.org/post/objected-oriented-to-functional/</link>
+      <pubDate>Sat, 21 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://terrenceho.org/post/objected-oriented-to-functional/</guid>
+      <description>Many coders have heard of the term &amp;quot;functional programming&amp;quot;, but have often never really used it or its properties. Especially if they came from Java, where there are no real functions, only methods each function has to be attached to an object, and cannot stand by itself. Functions are commomly thought of as defining behavior. However, functions can also be thought of as data, instead of just instructions. They are data that define your instructions.</description>
+    </item>
+    
+  </channel>
+</rss>
