@@ -61,7 +61,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.55.6" />
+ <meta name="generator" content="Hugo 0.69.0" />
         
 
         
@@ -176,60 +176,45 @@
 <p>In this first blog post, we shall experiment with treating functions as data that can define behavior.  To give an example of this, we will implement a calculator.  We will start with a more object oriented version to contrast object oriented vs functional, and then progressively replace functionality of the calculator with functional parts, while maintaining the same overall goal of having a calculator.</p>
 
 <p>We want it to be able to Add, Subtract, and Multiply.  Let's define a <em>Calculator</em> object to hold our accumulated value during calculations.  An accumulated value is simply so we can remember the previous value for successive operations.  $1+2=3$, then three is the accumulated value.  Our next operation will use $3$ and a another number.  We'll also define a <em>Do</em> method to compute an action.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
 
-<pre><code class="language-python">import math
-
-class Calculator(object):
-    def __init__(self):
-        self.acc = 0.0
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Calculator</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
     
-    def Do(self, opt, v):
-        if opt == 'Add':
-            self.acc += v
-        elif opt == 'Sub':
-            self.acc -= v
-        elif opt == 'Mul':
-            self.acc *= v
-        else:
-            print(&quot;Undefined Operation&quot;)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Do</span>(self, opt, v):
+        <span style="color:#66d9ef">if</span> opt <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Add&#39;</span>:
+            self<span style="color:#f92672">.</span>acc <span style="color:#f92672">+=</span> v
+        <span style="color:#66d9ef">elif</span> opt <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Sub&#39;</span>:
+            self<span style="color:#f92672">.</span>acc <span style="color:#f92672">-=</span> v
+        <span style="color:#66d9ef">elif</span> opt <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Mul&#39;</span>:
+            self<span style="color:#f92672">.</span>acc <span style="color:#f92672">*=</span> v
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Undefined Operation&#34;</span>)
         
-        return self.acc
-</code></pre>
-
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>acc</code></pre></div>
 <p>Above we have defined a <em>Calculator</em> object.  It has a <em>Do</em> method takes in a string <em>opt</em> to determine which operation to conduct, and a value  <em>v</em> float or int.  It currently has three actions, and returns the accumulated value once it is done computing the value. Below is an example of usage.</p>
-
-<pre><code class="language-python">c = Calculator()
-print(c.Do(&quot;Add&quot;, 100))
-print(c.Do(&quot;Sub&quot;, 50))
-print(c.Do(&quot;Mul&quot;, 2))
-</code></pre>
-
-<pre><code>100.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(<span style="color:#e6db74">&#34;Add&#34;</span>, <span style="color:#ae81ff">100</span>))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(<span style="color:#e6db74">&#34;Sub&#34;</span>, <span style="color:#ae81ff">50</span>))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(<span style="color:#e6db74">&#34;Mul&#34;</span>, <span style="color:#ae81ff">2</span>))</code></pre></div><pre><code>100.0
 50.0
-100.0
-</code></pre>
-
+100.0</code></pre>
 <p>Our <em>Calculator</em> is quite limited as of right now.  It can't really do much.  If we wanted to add some other functionality to the calculator, such as calculating the square root of the accumulated value, it would require adding another <code>elif</code> to the <em>Do</em> method.</p>
 
 <p>We would have to add another conditional for <em>every</em> operation we wanted to do.  This is not maintainable in the long run, and not user friendly.  If the user wanted to define his or her own operation to use with the calculator, they would have to edit the source code itself.</p>
 
 <p>Let's see if we can move functionality outside of the Do method.  Let's rewrite our calculator a little bit, but this time using a slightly more functional style.</p>
-
-<pre><code class="language-python">class Calculator(object):
-    def __init__(self):
-        self.acc = 0.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Calculator</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
     
-    def Do(self, opfunc, v):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Do</span>(self, opfunc, v):
         
-        self.acc = opfunc(self.acc, v)
-        return self.acc
-</code></pre>
-
+        self<span style="color:#f92672">.</span>acc <span style="color:#f92672">=</span> opfunc(self<span style="color:#f92672">.</span>acc, v)
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>acc</code></pre></div>
 <p>Now we have changed our calculator a bit.  <em>Do</em> is much simpler now, and takes in two standard parameters, <em>opfunc</em> and <em>v</em>.  What this calculator does is to take in an operation function <em>opfunc</em>, as well as the previous value <em>v</em>.  Whenever Do is called, it calls the operation we pass in, using the accumulated value the Calculator object holds and and value <em>v</em> passed in to compute a value.  For example, an adding function would take</p>
-
-<pre><code>self.acc + v
-</code></pre>
-
+<pre><code>self.acc + v</code></pre>
 <p>and return the value.</p>
 
 <p>Taking a moment to digest this, the <em>Do</em> method simply takes a function and executes it.  It doesn't take in a number value, but takes a function, evaulates that function using <em>v</em>, and returns the computed value.  The advantage of this is that functionality has moved outside the <em>Do</em> method inside the calculator.  Now the <em>Do</em> method only &quot;does&quot; a function that we supply it.</p>
@@ -237,175 +222,115 @@ print(c.Do(&quot;Mul&quot;, 2))
 <p>We can now redefine our previous <em>Add</em>, <em>Sub</em>, and <em>Mul</em> functions.  These are the functions that we pass into <em>Do</em>.  Examples are given below.</p>
 
 <p>New operation functions must follow the schema below.  It requires two numerical inputs and returns one computed value.</p>
-
 <pre><code>def Opt(value_a, value_b):
-    return operation
-</code></pre>
+    return operation</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Add</span>(a, b):
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
 
-<pre><code class="language-python">def Add(a, b):
-    return a + b
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Sub</span>(a, b):
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">-</span> b
 
-def Sub(a, b):
-    return a - b
-
-def Mul(a, b):
-    return a * b
-</code></pre>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Mul</span>(a, b):
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">*</span> b</code></pre></div>
 <p>Our <em>Add</em>, <em>Sub</em>, and <em>Mul</em> function all follow the above schema.  Take a moment to verify this.</p>
 
 <p>To use this calculator, all we have to do is pass in the function to the <em>Do</em> method.  This makes it very simple to define new operation functions and utilize them.  Below is an example.  The numerical outputs are still the same as before with the pre-defined if-statements.</p>
-
-<pre><code class="language-python">c = Calculator()
-print(c.Do(Add, 5))
-print(c.Do(Sub, 3))
-print(c.Do(Mul, 8))
-</code></pre>
-
-<pre><code>5.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add, <span style="color:#ae81ff">5</span>))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sub, <span style="color:#ae81ff">3</span>))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Mul, <span style="color:#ae81ff">8</span>))</code></pre></div><pre><code>5.0
 2.0
-16.0
-</code></pre>
-
+16.0</code></pre>
 <h1 id="extending-the-calculator">Extending the Calculator</h1>
 
 <p>Let's say some user wanted a square root function.  Easy, we just define another function!</p>
-
-<pre><code class="language-python">def Sqrt(a, _):
-    return math.sqrt(a)
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Sqrt</span>(a, _):
+    <span style="color:#66d9ef">return</span> math<span style="color:#f92672">.</span>sqrt(a)</code></pre></div>
 <p>Here is where our code got a little ugly.  <em>Sqrt</em> doesn't need an extra value <em>v</em> because it only acts on the accumulated value.  Previously, all of our operations required two numbers to use, <em>v</em> and the accumulated value.  This is why we have an underscore variable _ in place of v for the second parameter, because we ignore the input value <em>v</em> anyway.  An example of using <em>Sqrt</em> is below.</p>
-
-<pre><code class="language-python">print(c.Do(Sqrt, 0)) # Last operand ignored
-</code></pre>
-
-<pre><code>4.0
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sqrt, <span style="color:#ae81ff">0</span>)) <span style="color:#75715e"># Last operand ignored</span></code></pre></div><pre><code>4.0</code></pre>
 <p>The <em>Sqrt</em> function currently requires the user to ignore the second operand, which is a bit clunky.  We should clean this up.</p>
 
 <p>This problem occurs because our defined schema for the <em>Do</em> method is rather restricting. It requires that we have two numerical inputs. What if an operation only needs one parameter like <em>Sqrt</em>?  How about 3 parameters?  With the <em>Sqrt</em> we could just ignore a parameter, but that's more of a hack than a real solution.  And notice that our <em>Sqrt</em> function was really just a wrapper for the <code>math.sqrt(a)</code> from the standard library.  It would be more efficient and cleaner if we could just pass in the <code>math.sqrt(a)</code> function to the <em>Do</em> method instead.</p>
 
 <p>Things get a bit more complicated now.  Let's rewrite our operation functions from a function that takes two parameters and returns a value to a function that returns a function.  This returned function will take a value and return a value.  An example of an <em>Add</em> function is defined below.</p>
-
-<pre><code class="language-python">def Add(v):
-    def operation(acc):
-        return acc + v
-    return operation
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Add</span>(v):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(acc):
+        <span style="color:#66d9ef">return</span> acc <span style="color:#f92672">+</span> v
+    <span style="color:#66d9ef">return</span> operation</code></pre></div>
 <p>We also need to update our <em>Do</em> method.  <em>Do</em> now takes in a function that takes in one value and returns a value.</p>
-
-<pre><code class="language-python">class Calculator(object):
-    def __init__(self):
-        self.acc = 0.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Calculator</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
     
-    def Do(self, opfunc): 
-        self.acc = opfunc(self.acc)
-        return self.acc
-</code></pre>
-
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Do</span>(self, opfunc): 
+        self<span style="color:#f92672">.</span>acc <span style="color:#f92672">=</span> opfunc(self<span style="color:#f92672">.</span>acc)
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>acc</code></pre></div>
 <p>Why does our <em>Add</em> function return a function?  Here's the cool part about passing around functions as data.  We can modify a function before it is executed.  Let's give an example about how the add function would play out.</p>
 
 <p>Let's try <code>Add(10)</code>.  <em>Add</em> sets <em>v</em> equal to $10$.  It defines a function called <em>operation</em> that takes in a second value <em>acc</em> and adds it to <em>v</em>.  Then add returns <em>operation</em>.</p>
 
 <p>What specifically is returned when we call <code>Add(10)</code>?  The result of the function looks like this</p>
-
 <pre><code>def operation(acc):
-    return acc + 10
-</code></pre>
-
+    return acc + 10</code></pre>
 <p><code>Add(10)</code> returns a function that adds $10$ to <em>acc</em>.  <code>Add(9)</code> would return a function that adds $9$ to <em>acc</em>.</p>
-
 <pre><code>def operation(acc):
-    return acc + 9
-</code></pre>
-
+    return acc + 9</code></pre>
 <p>Let's see how adding works with <em>Do</em> now.</p>
-
-<pre><code class="language-python">c = Calculator()
-print(c.Do(Add(10)))
-print(c.Do(Add(20)))
-</code></pre>
-
-<pre><code>10.0
-30.0
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add(<span style="color:#ae81ff">10</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add(<span style="color:#ae81ff">20</span>)))</code></pre></div><pre><code>10.0
+30.0</code></pre>
 <p>When calling <em>Do</em>, we don't call it with the <code>Add</code> function itself, but the result of evaluating <code>Add(10)</code>.  The type of evaluating <code>Add(10)</code> is a function that takes in a value and returning a value. We are calling the operation function that is returned by <code>Add(10)</code>.<br>
 <em>Do</em> then passes in <code>self.acc</code> into the operation function to add $10$ to <code>self.acc</code>.</p>
 
 <p>We can define other functions in a similiar style.  Thus we can easily define other functions like this as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Sub</span>(v):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(acc):
+        <span style="color:#66d9ef">return</span> acc <span style="color:#f92672">-</span> v
+    <span style="color:#66d9ef">return</span> operation
 
-<pre><code class="language-python">def Sub(v):
-    def operation(acc):
-        return acc - v
-    return operation
-
-def Mul(v):
-    def operation(acc):
-        return acc * v
-    return operation
-</code></pre>
-
-<pre><code class="language-python">c = Calculator()
-print(c.Do(Add(5)))
-print(c.Do(Sub(3)))
-print(c.Do(Mul(8)))
-</code></pre>
-
-<pre><code>5.0
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Mul</span>(v):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(acc):
+        <span style="color:#66d9ef">return</span> acc <span style="color:#f92672">*</span> v
+    <span style="color:#66d9ef">return</span> operation</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add(<span style="color:#ae81ff">5</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sub(<span style="color:#ae81ff">3</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Mul(<span style="color:#ae81ff">8</span>)))</code></pre></div><pre><code>5.0
 2.0
-16.0
-</code></pre>
-
+16.0</code></pre>
 <p>Now how would we implement <em>Sqrt</em>?  It's quite simple now.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Sqrt</span>():
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(acc):
+        <span style="color:#66d9ef">return</span> math<span style="color:#f92672">.</span>sqrt(acc)
+    <span style="color:#66d9ef">return</span> operation
 
-<pre><code class="language-python">def Sqrt():
-    def operation(acc):
-        return math.sqrt(acc)
-    return operation
-
-c = Calculator()
-print(c.Do(Add(5)))
-print(c.Do(Sub(3)))
-print(c.Do(Mul(8)))
-print(c.Do(Sqrt()))
-</code></pre>
-
-<pre><code>5.0
+c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add(<span style="color:#ae81ff">5</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sub(<span style="color:#ae81ff">3</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Mul(<span style="color:#ae81ff">8</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sqrt()))</code></pre></div><pre><code>5.0
 2.0
 16.0
-4.0
-</code></pre>
-
+4.0</code></pre>
 <p>Our implementation avoids the awkardness of having to ignore an input variable.  But again <em>Sqrt</em> is just a wrapper of <code>math.sqrt(acc)</code>, so we can simply put that into the calculator instead.</p>
 
 <p>We can get real crazy and also implement different operations with any number of inputs.  Examples below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Crazy</span>(a, b, c, d, e):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(acc):
+        <span style="color:#66d9ef">return</span> (((a <span style="color:#f92672">+</span> b) <span style="color:#f92672">*</span> d) <span style="color:#f92672">**</span> e) <span style="color:#f92672">+</span> (c <span style="color:#f92672">*</span> acc )
+    <span style="color:#66d9ef">return</span> operation
 
-<pre><code class="language-python">def Crazy(a, b, c, d, e):
-    def operation(acc):
-        return (((a + b) * d) ** e) + (c * acc )
-    return operation
-
-c = Calculator()
-print(c.Do(Add(5)))
-print(c.Do(Sub(3)))
-print(c.Do(Mul(8)))
-print(c.Do(math.sqrt))
-print(c.Do(math.cos))
-print(c.Do(Crazy(1,2,3,4,5)))
-</code></pre>
-
-<pre><code>5.0
+c <span style="color:#f92672">=</span> Calculator()
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Add(<span style="color:#ae81ff">5</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Sub(<span style="color:#ae81ff">3</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Mul(<span style="color:#ae81ff">8</span>)))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(math<span style="color:#f92672">.</span>sqrt))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(math<span style="color:#f92672">.</span>cos))
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>Do(Crazy(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)))</code></pre></div><pre><code>5.0
 2.0
 16.0
 4.0
 -0.6536436208636119
-248830.03906913742
-</code></pre>
-
+248830.03906913742</code></pre>
 <h1 id="recap">Recap</h1>
 
 <p>We removed if statements from our <em>Calculator</em> object and went to an object that took in a function to evaluate.  But while this model was more flexible in that functions could be easily defined outside the <em>Calculator</em> and passed in, it could only take in two parameters.</p>
@@ -417,30 +342,24 @@ print(c.Do(Crazy(1,2,3,4,5)))
 <p>If we wanted to, we could get rid of the object <em>Calculator</em> and simply have a closure function instead.  This makes our implementation nearly entirely purely functional.  We need the <code>nonlocal</code> statement to indicate that <code>acc</code> is not within the score of the inner function.</p>
 
 <p>Note that because Calculator actually makes sense as an object since it's a noun, it would be better to leave it as an object.  However, this is just to show that closures can take the place of objects and can even be better.</p>
-
-<pre><code class="language-python">def Calculate():
-    acc = 0.0
-    def Do(opfunc): 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Calculate</span>():
+    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Do</span>(opfunc): 
         nonlocal acc
-        acc = opfunc(acc)
-        return acc
-    return Do
+        acc <span style="color:#f92672">=</span> opfunc(acc)
+        <span style="color:#66d9ef">return</span> acc
+    <span style="color:#66d9ef">return</span> Do
     
-c = Calculate()
-print(c(Add(5)))
-print(c(Sub(3)))
-print(c(Mul(8)))
-print(c(math.cos))
-print(c(Crazy(1,2,3,4,5)))
-</code></pre>
-
-<pre><code>5.0
+c <span style="color:#f92672">=</span> Calculate()
+<span style="color:#66d9ef">print</span>(c(Add(<span style="color:#ae81ff">5</span>)))
+<span style="color:#66d9ef">print</span>(c(Sub(<span style="color:#ae81ff">3</span>)))
+<span style="color:#66d9ef">print</span>(c(Mul(<span style="color:#ae81ff">8</span>)))
+<span style="color:#66d9ef">print</span>(c(math<span style="color:#f92672">.</span>cos))
+<span style="color:#66d9ef">print</span>(c(Crazy(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)))</code></pre></div><pre><code>5.0
 2.0
 16.0
 -0.9576594803233847
-248829.12702155902
-</code></pre>
-
+248829.12702155902</code></pre>
 <h1 id="conclusion">Conclusion</h1>
 
 <p>We went from a hard coded layered if statement to a function model, wherein we can pass in any function with any number of parameters to computer an accumulated value.  This kind of abstraction is the kind that can only be offered by functional programming.</p>
@@ -459,7 +378,7 @@ print(c(Crazy(1,2,3,4,5)))
 
         <footer>
 
-            <p class="copyright text-muted">&copy; Terrence Ho 2017-2019</p>
+            <p class="copyright text-muted">© Terrence Ho 2017-2019</p>
 
         </footer>
        

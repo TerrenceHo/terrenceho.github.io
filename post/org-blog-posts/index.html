@@ -61,7 +61,7 @@
 
 
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.55.6" />
+ <meta name="generator" content="Hugo 0.69.0" />
         
 
         
@@ -171,14 +171,11 @@
 </div>
 
 
-    <br> <div class="text-justify">
-
-<p>Hugo is an awesome blog generator. However, it&rsquo;s primary content mode is
+    <br> <div class="text-justify"><p>Hugo is an awesome blog generator. However, it&rsquo;s primary content mode is
 Markdown, and writing in <code>org-mode</code> feels much better than writing in Markdown.
 <code>org-mode</code> can automatically convert to Markdown, but then I have to edit the
 generated Markdown file to add YAML front-matter that Hugo consumes, which is
 annoying.</p>
-
 <p>Enter <a href="https://www.gnu.org/software/emacs/"><code>ox-hugo</code></a>. It allows you to maintain and generate Hugo-compatible Markdown
 in <code>org-mode</code>, and automatically generates the necessary metadata Hugo requires.
 However, like all good things in life, you have to work a little to configure it
@@ -186,28 +183,19 @@ to your liking. (What&rsquo;s an extension without spending a couple hours of li
 figuring out exactly how to make it conform to your workflow in the pursuit of
 &ldquo;optimization&rdquo;). This is how I configure <code>ox-hugo</code> to write all my blog posts
 (including this blog post!).</p>
-
 <h2 id="setup">Setup</h2>
-
 <h3 id="installation">Installation</h3>
-
 <p>Install the package <a href="https://ox-hugo.scripter.co/"><code>ox-hugo</code></a>. If you use <code>use-package</code> to manage your packages,
 the following snippet should do the trick.</p>
-
-<pre><code class="language-emacs-lisp">(use-package ox-hugo
-  :ensure t            ;Auto-install the package from Melpa (optional)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package ox-hugo
+  :ensure <span style="color:#66d9ef">t</span>            <span style="color:#75715e">;Auto-install the package from Melpa (optional)</span>
   :after ox)
-</code></pre>
-
-<p>I would recommend going through <code>ox-hugo</code>&rsquo;s documentation for maximum
+</code></pre></div><p>I would recommend going through <code>ox-hugo</code>'s documentation for maximum
 effectiveness.</p>
-
 <h3 id="base-directory">Base Directory</h3>
-
 <p>In a Hugo website, you might have a directory structure that looks the following
 layout. From now on, we will refer to this root directory as <code>HUGO_ROOT_DIR</code>.</p>
-
-<pre><code class="language-text">.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.
 ├── config.toml
 ├── content
 │   └── post
@@ -220,54 +208,39 @@ layout. From now on, we will refer to this root directory as <code>HUGO_ROOT_DIR
 ├── public
 │   ├── content
 │   │   └── post
-</code></pre>
-
-<p>Note that I have only shown the necessary parts, your actual directory structure
+</code></pre></div><p>Note that I have only shown the necessary parts, your actual directory structure
 will have many other files. <code>org</code> doesn&rsquo;t care about Hugo&rsquo;s directory structure,
 so I added a new directory called <code>content-org</code>. This is where I store all my
 <code>org</code> files for the blogs. We only need one <code>org</code> file, named post.org.</p>
-
 <h3 id="global-properties">Global Properties</h3>
-
 <p>Open up <code>$(HUGO_ROOT_DIR)/content_org/post.org</code> in Emacs. At the very top,
 insert the following (replace <code>&lt;your-name=here&gt;</code> with your name).</p>
-
-<pre><code class="language-text">#+AUTHOR: &lt;your-name-here&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#+AUTHOR: &lt;your-name-here&gt;
 #+HUGO_BASE_DIR: ../
-</code></pre>
-
-<p>This sets the author to be your name, and more importantly sets where
+</code></pre></div><p>This sets the author to be your name, and more importantly sets where
 <code>$(HUGO_ROOT_DIR)</code> is located at. In this case, the root directory is simply the
 parent directory. If your root directory is elsewhere, adjust <code>HUGO_BASE_DIR</code>
 appropriately. Setting <code>HUGO_BASE_DIR</code> is necessary for <code>ox-hugo</code> to set where
 it will be exporting files.</p>
-
 <p>Next, create a headline called Posts. Underneath, add the following properties.</p>
-
-<pre><code class="language-text">* Posts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">* Posts
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: post
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER:
 :END:
-</code></pre>
-
-<p><code>EXPORT_HUGO_SECTION</code> sets the directory under content to generate blog posts.
+</code></pre></div><p><code>EXPORT_HUGO_SECTION</code> sets the directory under content to generate blog posts.
 Here we&rsquo;ve set the export directory to be post, which corresponds to
 <code>$(HUGO_ROOT_DIR)/content/post</code>. Under <code>EXPORT_HUGO_CUSTOM_FRONT_MATTER</code>, you
 can set other YAML matter that you want to apply to all posts, such as
 configuring BlackFriday options (Hugo&rsquo;s markdown processor).</p>
-
 <h3 id="posts-per-subtree">Posts per Subtree</h3>
-
 <p>We&rsquo;ve now setup the basics of <code>ox-hugo</code>. Next, we will look at how to write a
 blog post.</p>
-
 <p>Most blog posts intuitively are written as one file per post. However, <code>ox-hugo</code>
 allows us to write all of our blog posts in one single file, and export to many
 different files. Thus, all of my blog posts live in
 <code>$(HUGO_ROOT_DIR)/content_org/post.org</code>, and eack blog post is exported as many
 different files under <code>$(HUGO_ROOT_DIR)/content/post/</code>.</p>
-
 <p>The motivation behind this lies with how <code>org-mode</code> lists work. In a <code>org-mode</code>
 list we can set TODO items, and manipulate the entries using <code>org-mode</code>
 shortcuts. Then in a sense, we can think of a blog post as a TODO item, and
@@ -277,55 +250,40 @@ collapsed view of the Posts tree. There are three blog posts, with one marked
 as DONE, and the rest TODO or IN-PROGRESS. (To collapse a subtree in <code>org-mode</code>,
 press <code>S-TAB</code>. You can then press <code>TAB</code> on the POSTS headline to see
 sub-headlines underneath it.)</p>
-
-<pre><code class="language-text">* Posts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">* Posts
 ** TODO Go Essentials Part 1                               :go:go_essentials:⤵
 ** IN-PROGRESS Microsoft Internship                    :microsoft:internship:⤵
 ** DONE How I started Using Emacs                                 :emcas:org:⤵
-</code></pre>
-
-<p>Thus in a nutshell, we have the Posts top level headline, then TODO items as
+</code></pre></div><p>Thus in a nutshell, we have the Posts top level headline, then TODO items as
 secondary headlines. Each TODO item is a blog post, either finished or
 unfinished. Any content underneath the secondary headlines is part of the actual
 blog post. In the snippet above, I have collapsed the content, leaving only a ⤵
 to indicate there is data underneath the headline. All your blog posts live
 under the Posts subtree. So anytime you want to edit a blog post, you open
 <code>$(HUGO_ROOT_DIR)/content_org/post.org</code> and edit the appropriate subtree.</p>
-
 <h3 id="blog-properties">Blog Properties</h3>
-
 <p>We also want to be able to add some properties to an individual blog post. We
 can do so like this:</p>
-
-<pre><code class="language-text">* Posts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">* Posts
 ** TODO Next Blog Post
 :PROPERTIES:
 :EXPORT_FILE_NAME: how-i-started-using-emacs
 :END:
-</code></pre>
-
-<p>This sets the file name to be exported to. There are other properties you can
+</code></pre></div><p>This sets the file name to be exported to. There are other properties you can
 set, all detailed in the <code>ox-hugo</code> docs. All the properties are translated to
 Hugo YAML front-matter. In this fashion, <code>ox-hugo</code> allows you to set file
 specific YAML front-matter in an <code>org-mode</code>-like way.</p>
-
 <h3 id="tags">Tags</h3>
-
 <p><code>ox-hugo</code> can also generate the tags in the YAML front-matter. You can set the
 tags in each blog headline such as the following. This saves you the trouble of
 having to write the tabs into the <code>PROPERTIES</code> themselves, since that is
 slightly more troublesome. Additionally, this makes use of <code>org-mode</code> tags,
 allowing <code>org-mode</code> to format your tags nicely.</p>
-
-<pre><code class="language-text">* Posts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">* Posts
 ** TODO Next Blog Post                                           :tag1:tag2:
-</code></pre>
-
-<p>These tags allow you to group related posts. Hugo can read these tags and link
+</code></pre></div><p>These tags allow you to group related posts. Hugo can read these tags and link
 all blog posts with the same tags, so this is a very neat feature.</p>
-
 <h3 id="publishing-a-blog-post">Publishing a Blog Post</h3>
-
 <p>To publish a blog post, set the blog post from TODO to DONE. (For those new to
 <code>org-mode</code>, you can do this by pressing <code>C-c C-t</code>. This should bring up a side
 window that allows you to set the status of the TODO item.) If you have
@@ -333,16 +291,13 @@ configured your <code>org-mode</code> to output a date at which when an item was
 <code>ox-hugo</code> will automatically set that date at the publishing date, which is much
 more convenient than setting the date manually. An example is shown in the
 section below.</p>
-
 <h3 id="putting-it-all-together">Putting it all together</h3>
-
 <p>Here is an example of the Posts subtree along with two blog posts, one finished
 and one unfinished. The finished blog post has a CLOSED timestamp indicating the
 date at which it was finsihed. The unfinished blog post is considered a draft to
 Hugo, and so Hugo won&rsquo;t compile that blog post unless Hugo is set to compile the
 drafts as well.</p>
-
-<pre><code class="language-text">#+AUTHOR: Terrence Ho
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#+AUTHOR: Terrence Ho
 #+HUGO_BASE_DIR: ../
 * Posts
 ** TODO Next Blog Post
@@ -367,14 +322,10 @@ Even more text... Ipsum Lorem
 :END:
 
 This blog post was finished one Monday, June 17th, 2019.
-</code></pre>
-
-<h2 id="converting-to-markdown">Converting to Markdown</h2>
-
+</code></pre></div><h2 id="converting-to-markdown">Converting to Markdown</h2>
 <p>Lastly, once all this is set up, we will want to convert out posts to Markdown
-files. Luckily, <code>ox-hugo</code> also builds in an exporter to complement <code>org-mode</code>&rsquo;s
+files. Luckily, <code>ox-hugo</code> also builds in an exporter to complement <code>org-mode</code>'s
 exporting capabilities.</p>
-
 <p>To export a subtree as a post, press <code>C-c C-e</code>. This should bring up a side menu
 detailing all the export methods available to you. Press <code>H H</code> to export the
 subtree as a file (altogether, press <code>C-c C-e H H</code>). <code>ox-hugo</code> determines where
@@ -384,11 +335,8 @@ subtrees, but rather one blog post per <code>org</code> file, then use <code>C-c
 exports everything in the file to Markdown. Personally, I structure my blog
 posts in the subtree style, because of how well it fits the <code>org-mode</code> workflow,
 but YMMV.</p>
-
 <p>The exporting side view looks like the following:</p>
-
-<p><a id="org8b629a3"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <figure>
     <img src="/ox-hugo/org-mode-exporting-view.png"
          alt="Figure 1: org-mode exporting view"/> <figcaption>
@@ -396,9 +344,7 @@ but YMMV.</p>
         </figcaption>
 </figure>
 
-
 <h2 id="conclusion-dot">Conclusion.</h2>
-
 <p>I hope you&rsquo;ve enjoyed learning how to write blog posts with <code>org-mode</code>. I&rsquo;ve
 honestly never enjoyed writing Markdown, and so this gives me a convenient and
 fun way to write my future blog posts. Stay tuned for more similiar content!</p>
@@ -439,7 +385,7 @@ fun way to write my future blog posts. Stay tuned for more similiar content!</p>
 
         <footer>
 
-            <p class="copyright text-muted">&copy; Terrence Ho 2017-2019</p>
+            <p class="copyright text-muted">© Terrence Ho 2017-2019</p>
 
         </footer>
        
