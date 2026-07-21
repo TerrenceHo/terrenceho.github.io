@@ -1,294 +1,96 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head>
-         
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Benchmarking Fib with Go</title>
-        
-        <link rel="icon" href="https://terrenceho.org/favicon.ico">
-        
-        <style>
-
-    html body {
-        font-family: 'Raleway', sans-serif;
-        background-color: white;
-    }
-
-    :root {
-        --accent: red;
-        --border-width:  0 ;
-    }
-
-</style>
-
-
-<link rel="stylesheet" href="https://terrenceho.org/css/main.css">
-
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-
-
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" />
- 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/emacs-lisp.min.js"></script> 
-
-    <script>hljs.initHighlightingOnLoad();</script>
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
- <meta name="generator" content="Hugo 0.69.0" />
-        
-
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-        
-
-        
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-86036425-2');
-        </script>
-    </head>
-
-    
-    
-    <script type="text/javascript" async
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
-    
-
-    <body>
-         
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-
-                <div class="navbar-header">
-
-                    <a class="navbar-brand visible-xs" href="#">Benchmarking Fib with Go</a>
-
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                </div>
-
-                <div class="collapse navbar-collapse">
-
-                    
-                        <ul class="nav navbar-nav">
-                            
-                                <li><a href="/">Home</a></li>
-                            
-                                <li><a href="/post/">Posts</a></li>
-                            
-                                <li><a href="/personalfinance.pdf">Personal Finance Guide</a></li>
-                            
-                        </ul>
-                    
-
-                    
-                        <ul class="nav navbar-nav navbar-right">
-                            
-                                <li class="navbar-icon"><a href="mailto:terrenceho.books@gmail.com" target="_blank"><i class="fas fa-envelope-open"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://github.com/TerrenceHo/" target="_blank"><i class="fab fa-github"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/terrence-ho/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="/terrencehoresume.pdf" target="_blank"><i class="fas fa-file-alt"></i></a></li>
-                            
-                                <li class="navbar-icon"><a href="/index.xml" target="_blank"><i class="fas fa-rss"></i></a></li>
-                            
-                        </ul>
-                    
-
-                </div>
-
-            </div>
-
-        </nav>
-
-
-<main>
-
-    <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/post/benchmarking-fibonacci/">Benchmarking Fib with Go</a></h4>
-    <h5>August 22, 2018</h5>
-    
-    <a href="https://terrenceho.org/tags/go"><kbd class="item-tag">go</kbd></a>
-    
-    <a href="https://terrenceho.org/tags/fibonacci"><kbd class="item-tag">fibonacci</kbd></a>
-    
-    <a href="https://terrenceho.org/tags/benchmark"><kbd class="item-tag">benchmark</kbd></a>
-    
-
-</div>
-
-
-    <br> <div class="text-justify"><p>Go has a really nice testing suite built into its compiler tool chains. It's as
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Benchmarking Fib with Go</title><link rel=icon href=https://terrenceho.org/favicon.ico><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:0}</style><link rel=stylesheet href=https://terrenceho.org/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.7/css/all.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/emacs-lisp.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.164.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-86036425-2")</script></head><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Benchmarking Fib with Go</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>Home</a></li><li><a href=/post/>Posts</a></li><li><a href=/personalfinance.pdf>Personal Finance Guide</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:contact@thohq.com target=_blank><i class="fas fa-envelope-open"></i></a></li><li class=navbar-icon><a href=https://github.com/TerrenceHo/ target=_blank><i class="fab fa-github"></i></a></li><li class=navbar-icon><a href=https://www.linkedin.com/in/terrence-ho/ target=_blank><i class="fab fa-linkedin"></i></a></li><li class=navbar-icon><a href=/index.xml target=_blank><i class="fas fa-rss"></i></a></li></ul></div></div></nav><main><div class=item><h4><a href=/post/benchmarking-fibonacci/>Benchmarking Fib with Go</a></h4><h5>August 22, 2018</h5><a href=https://terrenceho.org/tags/go><kbd class=item-tag>go</kbd></a>
+<a href=https://terrenceho.org/tags/fibonacci><kbd class=item-tag>fibonacci</kbd></a>
+<a href=https://terrenceho.org/tags/benchmark><kbd class=item-tag>benchmark</kbd></a></div><br><div class=text-justify><p>Go has a really nice testing suite built into its compiler tool chains. It&rsquo;s as
 simple as running <code>go test</code> in your package, and all files marked *_tests.go
 will be executed. We can also run benchmarks during testing, by adding the
 <code>-bench</code> flag to the <code>go test</code> command. I never really benchmarked anything
-before, so I decided to explore Go's benchmarking utilities, and flex some of my
+before, so I decided to explore Go&rsquo;s benchmarking utilities, and flex some of my
 algorithm skills in the process. Naturally I decided implement the Fibonacci
-sequence many, many times over.</p>
-
-<p>The repository lies at <a href="https://github.com/TerrenceHo/fib">https://github.com/TerrenceHo/fib</a>, where you can
-use git to clone it.  You can also use <code>go get github.com/TerrenceHo/fib</code>
-if you have a go runtime, which you'll need to run tests.  The file
+sequence many, many times over.</p><p>The repository lies at <a href=https://github.com/TerrenceHo/fib>https://github.com/TerrenceHo/fib</a>, where you can
+use git to clone it. You can also use <code>go get github.com/TerrenceHo/fib</code>
+if you have a go runtime, which you&rsquo;ll need to run tests. The file
 <code>fib.go</code> holds various fibconacci implementations and some documentation.
 The associated tests and benchmarks lie in <code>fib_test.go</code>. To run the benchmarks,
 use <code>go test -bench=.</code>. To just run the tests, use <code>go test .</code> My benchmarks are
 at the bottom of the article, but we refer to these benchmarks multiple times in
-our discussion. I encourage you to try these benchmarks for yourselves.</p>
-
-<h3 id="fibrecursive-exponential-recursive">FibRecursive: Exponential Recursive</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibRecursive</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> &lt; <span style="color:#ae81ff">2</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>
-    } 
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">FibRecursive</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">FibRecursive</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
-} </code></pre></div>
-<p>The most basic Fib sequence algorithm known to man, <code>FibRecursive</code> boasts
-a mighty exponential \(O(2^n)\) run time, and is so slow I can't even run
-<code>FibRecursive(64)</code> on my laptop without having to wait for an eternity.<br>
-The reason being, for an input \(n\), \(n+1\) takes almost twice as long to
+our discussion. I encourage you to try these benchmarks for yourselves.</p><h3 id=fibrecursive-exponential-recursive>FibRecursive: Exponential Recursive</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibRecursive</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> &lt; <span style=color:#ae81ff>2</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>n</span>
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>FibRecursive</span>(<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> <span style=color:#a6e22e>FibRecursive</span>(<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>} 
+</span></span></code></pre></div><p>The most basic Fib sequence algorithm known to man, <code>FibRecursive</code> boasts
+a mighty exponential \(O(2^n)\) run time, and is so slow I can&rsquo;t even run
+<code>FibRecursive(64)</code> on my laptop without having to wait for an eternity.<br>The reason being, for an input \(n\), \(n+1\) takes almost twice as long to
 computer, since the recursive tree makes two recursive calls each level
-and doubles the computation need for the next level.</p>
-
-<p><figure><img src="/img/fibtree5.png" alt="fibtree5"></figure></p>
-
-<p>In our testing suite, we max our runtimecalls at \(n=32\). Memory-wise,
+and doubles the computation need for the next level.</p><p><img src=/img/fibtree5.png alt=fibtree5></p><p>In our testing suite, we max our runtimecalls at \(n=32\). Memory-wise,
 <code>FibRecursive</code> is also inefficient, since each function call
 creates adds to the function call stack, and so runs the danger of
-actually running out of memory at high inputs.</p>
-
-<p><code>FibRecursive</code> is clearly unoptimal and so the next few examples of Fibonacci
-show slightly more optimized versions.</p>
-
-<h3 id="fibrecursivecache-exponential-recursive-cache">FibRecursiveCache: Exponential Recursive Cache</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibRecursiveCache</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">cache</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) 
-    <span style="color:#a6e22e">fibRecursiveCache</span>(<span style="color:#a6e22e">n</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">cache</span>) 
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cache</span>[<span style="color:#a6e22e">n</span>]
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibRecursiveCache</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">cache</span> <span style="color:#f92672">*</span>[]<span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> &lt; <span style="color:#ae81ff">2</span> {
-        (<span style="color:#f92672">*</span><span style="color:#a6e22e">cache</span>)[<span style="color:#ae81ff">0</span>] = <span style="color:#ae81ff">0</span> 
-        (<span style="color:#f92672">*</span><span style="color:#a6e22e">cache</span>)[<span style="color:#ae81ff">1</span>] = <span style="color:#ae81ff">1</span> 
-        <span style="color:#66d9ef">return</span>
-    } 
-    <span style="color:#a6e22e">fibRecursiveCache</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">cache</span>)
-
-    (<span style="color:#f92672">*</span><span style="color:#a6e22e">cache</span>)[<span style="color:#a6e22e">n</span>] = (<span style="color:#f92672">*</span><span style="color:#a6e22e">cache</span>)[<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> (<span style="color:#f92672">*</span><span style="color:#a6e22e">cache</span>)[<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
-} </code></pre></div>
-<p>We notice from the previous expanded <code>FibRecursive</code> tree that many values are
+actually running out of memory at high inputs.</p><p><code>FibRecursive</code> is clearly unoptimal and so the next few examples of Fibonacci
+show slightly more optimized versions.</p><h3 id=fibrecursivecache-exponential-recursive-cache>FibRecursiveCache: Exponential Recursive Cache</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibRecursiveCache</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cache</span> <span style=color:#f92672>:=</span> make([]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibRecursiveCache</span>(<span style=color:#a6e22e>n</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>cache</span>) 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>cache</span>[<span style=color:#a6e22e>n</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibRecursiveCache</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>cache</span> <span style=color:#f92672>*</span>[]<span style=color:#66d9ef>int</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> &lt; <span style=color:#ae81ff>2</span> {
+</span></span><span style=display:flex><span>        (<span style=color:#f92672>*</span><span style=color:#a6e22e>cache</span>)[<span style=color:#ae81ff>0</span>] = <span style=color:#ae81ff>0</span> 
+</span></span><span style=display:flex><span>        (<span style=color:#f92672>*</span><span style=color:#a6e22e>cache</span>)[<span style=color:#ae81ff>1</span>] = <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibRecursiveCache</span>(<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>cache</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    (<span style=color:#f92672>*</span><span style=color:#a6e22e>cache</span>)[<span style=color:#a6e22e>n</span>] = (<span style=color:#f92672>*</span><span style=color:#a6e22e>cache</span>)[<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>cache</span>)[<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>]
+</span></span><span style=display:flex><span>} 
+</span></span></code></pre></div><p>We notice from the previous expanded <code>FibRecursive</code> tree that many values are
 computed many times (i.e. <code>FibRecursive(2)</code> is computed thrice). What if
 we compute these values once, and then store it? We can optimize our previous
 algorithm by caching previous computed values in an array. In doing so, we
 lower our runtime from exponential to linear \(O(n)\), since we cut off most of the
-computation tree.</p>
-
-<p><figure><img src="/img/fibtree5Linear.png" alt="fibtree5Linear"></figure></p>
-
-<p><code>FibRecursiveCache</code> recurses from \(n\) to 1, and then builds the cache
-going backwards.  The right-most value in our array holds our final answer.
+computation tree.</p><p><img src=/img/fibtree5Linear.png%22 alt=fibtree5Linear></p><p><code>FibRecursiveCache</code> recurses from \(n\) to 1, and then builds the cache
+going backwards. The right-most value in our array holds our final answer.
 <code>FibRecursiveCache</code> ends up with both a linear runtime and linear memory
-usage, due to the array cache.</p>
-
-<p>So where can we improve from here? Let's set aside the runtime optimizations for
+usage, due to the array cache.</p><p>So where can we improve from here? Let&rsquo;s set aside the runtime optimizations for
 now, and tackle the memory issue first. If we can get rid of the entire cache,
 we could save a lot of memeory, since memory is not infinite nor free even on
 modern computers. The Fibonacci only requires the addition of the two previous
-terms. So really, we don't need to save all previously calculated Fibonacci
-values. We can make do with just the previous two, leading us to...</p>
-
-<h3 id="fibiterative-linear-iterative-implementation">FibIterative: Linear Iterative Implementation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibIterative</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">temp</span> <span style="color:#66d9ef">int</span> 
-    <span style="color:#a6e22e">first</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span> 
-    <span style="color:#a6e22e">second</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span> 
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">temp</span> = <span style="color:#a6e22e">second</span> 
-        <span style="color:#a6e22e">second</span> = <span style="color:#a6e22e">first</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">second</span> 
-        <span style="color:#a6e22e">first</span> = <span style="color:#a6e22e">temp</span>
-    } 
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">second</span>
-} </code></pre></div>
-<p><code>FibIterative</code> takes the concept that we do not really need to keep every
+terms. So really, we don&rsquo;t need to save all previously calculated Fibonacci
+values. We can make do with just the previous two, leading us to&mldr;</p><h3 id=fibiterative-linear-iterative-implementation>FibIterative: Linear Iterative Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibIterative</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>temp</span> <span style=color:#66d9ef>int</span> 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>first</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span> 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>second</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> &lt; <span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>temp</span> = <span style=color:#a6e22e>second</span> 
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>second</span> = <span style=color:#a6e22e>first</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>second</span> 
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>first</span> = <span style=color:#a6e22e>temp</span>
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>second</span>
+</span></span><span style=display:flex><span>} 
+</span></span></code></pre></div><p><code>FibIterative</code> takes the concept that we do not really need to keep every
 previous computed value, only the previous number. Thus we get rid of the
 cache entirely and instead add the two previous numbers together in a
 loop. This eliminates the need to keep the entire cache in memory, while
-keeping the runtime linear, and making the memory required constant.</p>
-
-<p><code>FibIterative</code> and <code>FibRecursiveCache</code> both have a linear runtime, but
+keeping the runtime linear, and making the memory required constant.</p><p><code>FibIterative</code> and <code>FibRecursiveCache</code> both have a linear runtime, but
 <code>FibIterative</code> performs better on benchmarks, largely due to practical computer
 limitations. Performing function calls is slower than iterating through a loop,
 since the program must deal with managing the function call stack compared to
 simply incrementing a variable. Thus, on my computer anyway, the iterative
-implementation is faster.</p>
-
-<h3 id="fibtailrecursive-tail-recursive-implementation">FibTailRecursive: Tail Recursive Implementation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibTailRecursive</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fibTailRecursive</span>(<span style="color:#a6e22e">n</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibTailRecursive</span>(<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">first</span>, <span style="color:#a6e22e">second</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">first</span>
-    }
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fibTailRecursive</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">second</span>, <span style="color:#a6e22e">first</span><span style="color:#f92672">+</span><span style="color:#a6e22e">second</span>)
-} </code></pre></div>
-<p>Tail recursion is a trick to place all recursive calls at the end, and do no
+implementation is faster.</p><h3 id=fibtailrecursive-tail-recursive-implementation>FibTailRecursive: Tail Recursive Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibTailRecursive</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fibTailRecursive</span>(<span style=color:#a6e22e>n</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibTailRecursive</span>(<span style=color:#a6e22e>n</span>, <span style=color:#a6e22e>first</span>, <span style=color:#a6e22e>second</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>first</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fibTailRecursive</span>(<span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>second</span>, <span style=color:#a6e22e>first</span><span style=color:#f92672>+</span><span style=color:#a6e22e>second</span>)
+</span></span><span style=display:flex><span>} 
+</span></span></code></pre></div><p>Tail recursion is a trick to place all recursive calls at the end, and do no
 more computation after the recursive call returns. This enables the compiler to
 reuse the current function call frame and avoid having to create another
 (useless) function stack frame. Therefore, tail recursive implementations can be
@@ -297,175 +99,112 @@ On benchmarks, <code>FibTailRecursive</code> performs better than <code>FibRecur
 still worse than <code>FibIterative</code>. I speculate that memory access and recursive
 calls contribute to <code>FibRecursiveCache's</code> worse performace. <code>FibTailRecursive</code>
 still has to deal with the very first and last function call, which may explain
-the slightly worse performance compared to <code>FibIterative</code>.</p>
-
-<p>Memory wise, <code>FibTailRecursive</code> can be considered to use constant time memory,
+the slightly worse performance compared to <code>FibIterative</code>.</p><p>Memory wise, <code>FibTailRecursive</code> can be considered to use constant time memory,
 because function call frames are not allocated every function call, and
-<code>FibTailRecursive</code> does not allocate extra memory, unlike <code>FibRecursiveCache</code>.</p>
-
-<p>Let's see if we can still find a faster implementation for the Fibonacci
-sequence.</p>
-
-<h3 id="fibpowermatrix-linear-matrix-implementation">FibPowerMatrix: Linear Matrix Implementation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibPowerMatrix</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">F</span> <span style="color:#f92672">:=</span> [<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, 
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},
-    } 
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-    } 
-    <span style="color:#a6e22e">fibPower</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">F</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">F</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibPower</span>(<span style="color:#a6e22e">F</span> <span style="color:#f92672">*</span>[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#a6e22e">M</span> <span style="color:#f92672">:=</span> [<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, 
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},
-    } 
-    
-    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">2</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-        <span style="color:#a6e22e">fibMultiply</span>(<span style="color:#a6e22e">F</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">M</span>)
-    }
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibMultiply</span>(<span style="color:#a6e22e">F</span> <span style="color:#f92672">*</span>[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">M</span> <span style="color:#f92672">*</span>[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>) {
-    <span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">F</span>
-    <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">M</span>
-    <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
-    <span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]
-    <span style="color:#a6e22e">z</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]
-    <span style="color:#a6e22e">w</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">f</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]
-
-    (<span style="color:#f92672">*</span><span style="color:#a6e22e">F</span>)[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] = <span style="color:#a6e22e">x</span>
-    (<span style="color:#f92672">*</span><span style="color:#a6e22e">F</span>)[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] = <span style="color:#a6e22e">y</span>
-    (<span style="color:#f92672">*</span><span style="color:#a6e22e">F</span>)[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] = <span style="color:#a6e22e">z</span>
-    (<span style="color:#f92672">*</span><span style="color:#a6e22e">F</span>)[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] = <span style="color:#a6e22e">w</span>
-}</code></pre></div>
-<p>For the unintiated, this algorithm looks a rather complicated. It utilizes
+<code>FibTailRecursive</code> does not allocate extra memory, unlike <code>FibRecursiveCache</code>.</p><p>Let&rsquo;s see if we can still find a faster implementation for the Fibonacci
+sequence.</p><h3 id=fibpowermatrix-linear-matrix-implementation>FibPowerMatrix: Linear Matrix Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibPowerMatrix</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>F</span> <span style=color:#f92672>:=</span> [<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>}, 
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>},
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibPower</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>F</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>F</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibPower</span>(<span style=color:#a6e22e>F</span> <span style=color:#f92672>*</span>[<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>M</span> <span style=color:#f92672>:=</span> [<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>}, 
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>},
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>2</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fibMultiply</span>(<span style=color:#a6e22e>F</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>M</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibMultiply</span>(<span style=color:#a6e22e>F</span> <span style=color:#f92672>*</span>[<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>M</span> <span style=color:#f92672>*</span>[<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>f</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>F</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>m</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>M</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>x</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>1</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>y</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>1</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>z</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>w</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>f</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>m</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    (<span style=color:#f92672>*</span><span style=color:#a6e22e>F</span>)[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>] = <span style=color:#a6e22e>x</span>
+</span></span><span style=display:flex><span>    (<span style=color:#f92672>*</span><span style=color:#a6e22e>F</span>)[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>1</span>] = <span style=color:#a6e22e>y</span>
+</span></span><span style=display:flex><span>    (<span style=color:#f92672>*</span><span style=color:#a6e22e>F</span>)[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>0</span>] = <span style=color:#a6e22e>z</span>
+</span></span><span style=display:flex><span>    (<span style=color:#f92672>*</span><span style=color:#a6e22e>F</span>)[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>] = <span style=color:#a6e22e>w</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>For the unintiated, this algorithm looks a rather complicated. It utilizes
 \(2 \times 2\) matrix multiplication, and it is not immediately obvious how matrix
 multiplcation can help solve the Fibonacci sequence. We shall prove the
 following theorem using induction, where \(F_{n}\) represents the Fibonacci
-sequence at step \(n\).</p>
-
-<p><span  class="math">\[ M = \left( \begin{array}{ccc} F_{n+1} & F_{n} \\ F_{n} & F_{n-1} \\ \end{array} \right) = \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n \]</span></p>
-
-<p>For \(n=1\),</p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^1 = \left( \begin{array}{ccc} F_{2} & F_{1} \\ F_{1} & F_{0} \\ \end{array} \right) \]</span></p>
-
-<p>Which is obvious, these are the first three values in the Fibonacci sequence,
-\(1, 1, 0\).</p>
-
-<p>Assume that this step holds for \(n=k\).</p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^k =  \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \]</span></p>
-
-<p>Now we attempt to prove that the statement still holds for \(n=k+1\), and so the
+sequence at step \(n\).</p><p>$$ M = \left( \begin{array}{ccc} F_{n+1} & F_{n} \ F_{n} & F_{n-1} \ \end{array} \right) = \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^n $$</p><p>For \(n=1\),</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^1 = \left( \begin{array}{ccc} F_{2} & F_{1} \ F_{1} & F_{0} \ \end{array} \right) $$</p><p>Which is obvious, these are the first three values in the Fibonacci sequence,
+\(1, 1, 0\).</p><p>Assume that this step holds for \(n=k\).</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^k = \left( \begin{array}{ccc} F_{k+1} & F_{k} \ F_{k} & F_{k-1} \ \end{array} \right) $$</p><p>Now we attempt to prove that the statement still holds for \(n=k+1\), and so the
 statement would be solved. We multiple both sides by
-<span  class="math">\( \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) \)</span></p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^k \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) =  \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) \]</span></p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k+1} = \left( \begin{array}{ccc} F_{k+1} + F_{k} & F_{k+1} \\ F_{k} + F_{k-1} & F_{k} \\ \end{array} \right) \]</span></p>
-
-<p>This implies that</p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k+1} =  \left( \begin{array}{ccc} F_{k+2} & F_{k+1} \\ F_{k+1} & F_{k} \\ \end{array} \right) \]</span></p>
-
-<p>Thus, by proof by induction, our assumption holds true for any \(n=k+1\). This is
+$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right) $$</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^k \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right) = \left( \begin{array}{ccc} F_{k+1} & F_{k} \ F_{k} & F_{k-1} \ \end{array} \right) \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right) $$</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^{k+1} = \left( \begin{array}{ccc} F_{k+1} + F_{k} & F_{k+1} \ F_{k} + F_{k-1} & F_{k} \ \end{array} \right) $$</p><p>This implies that</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^{k+1} = \left( \begin{array}{ccc} F_{k+2} & F_{k+1} \ F_{k+1} & F_{k} \ \end{array} \right) $$</p><p>Thus, by proof by induction, our assumption holds true for any \(n=k+1\). This is
 basically a simple way to increment the Fibonacci sequence once every matrix
 multiplcation. We calculate the matrices in a loop, similiar to our tail
 recursive implementation. Our final answer will be held in the \(F_{k+2}\) after
-\(n\) iterations.</p>
-
-<p>However, this is still a linear runtime implementation. Worse, since matrix
+\(n\) iterations.</p><p>However, this is still a linear runtime implementation. Worse, since matrix
 muliplication involves more operations, it is slower than most of our other
 linear implementations. However, matrix multiplcation opens up a trick to gain a
 massive speed boost. Memory wise, because we reuse the same matrix, this
-implementation is constant time.</p>
-
-<h3 id="fibpowermatrixrecursive-logn-matrix-implementation">FibPowerMatrixRecursive: \(Log_n\) Matrix Implementation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FibPowerMatrixRecursive</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-    <span style="color:#a6e22e">F</span> <span style="color:#f92672">:=</span> [<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, 
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},
-    }
-
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-    } 
-    <span style="color:#a6e22e">fibPowerRecursive</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">F</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">F</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibPowerRecursive</span>(<span style="color:#a6e22e">F</span> <span style="color:#f92672">*</span>[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> {
-    <span style="color:#66d9ef">return</span>
-    }
-
-    <span style="color:#a6e22e">M</span> <span style="color:#f92672">:=</span> [<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, 
-        [<span style="color:#ae81ff">2</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},
-    } 
-    <span style="color:#a6e22e">fibPowerRecursive</span>(<span style="color:#a6e22e">F</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) 
-    <span style="color:#a6e22e">fibMultiply</span>(<span style="color:#a6e22e">F</span>, <span style="color:#a6e22e">F</span>) 
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> {
-        <span style="color:#a6e22e">fibMultiply</span>(<span style="color:#a6e22e">F</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">M</span>)
-    }
-} </code></pre></div>
-<p><code>FibPowerMatrixRecursive</code> is pretty similiar to the previous implementation.
+implementation is constant time.</p><h3 id=fibpowermatrixrecursive-log_n-matrix-implementation>FibPowerMatrixRecursive: \(Log_n\) Matrix Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>FibPowerMatrixRecursive</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>F</span> <span style=color:#f92672>:=</span> [<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>}, 
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>},
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibPowerRecursive</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>F</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>F</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibPowerRecursive</span>(<span style=color:#a6e22e>F</span> <span style=color:#f92672>*</span>[<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>M</span> <span style=color:#f92672>:=</span> [<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>}, 
+</span></span><span style=display:flex><span>        [<span style=color:#ae81ff>2</span>]<span style=color:#66d9ef>int</span>{<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>},
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibPowerRecursive</span>(<span style=color:#a6e22e>F</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fibMultiply</span>(<span style=color:#a6e22e>F</span>, <span style=color:#a6e22e>F</span>) 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span><span style=color:#f92672>%</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>!=</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fibMultiply</span>(<span style=color:#a6e22e>F</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>M</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>} 
+</span></span></code></pre></div><p><code>FibPowerMatrixRecursive</code> is pretty similiar to the previous implementation.
 However, it uses exponentiation to calculate matrices, rather than simply
 multiplying
-<span  class="math">\( \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) \)</span>
+$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right) $$
 to the previous result
-<span  class="math">\( \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{k} \)</span></p>
-
-<p>Ignoring matrices for now, consider calculating \(2^8\).  We can compute that as
+$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^{k} $$</p><p>Ignoring matrices for now, consider calculating \(2^8\). We can compute that as
 \(2 * 2 * 2 * 2 * 2 * 2 * 2 * 2\), and multiple across, which would require 7
 multiplication operations. However, you can achieve the same result by using
 \(4 * 4 * 4 * 4\), since \(2 * 2 = 4\). So we can multiply \(2 * 2\) once to
 get \(4\), and then use that result to finish the calculation. But we can do
 that previous step multiple times, and so \(4 * 4 = 16\), \(16 * 16 = 256 =
 2^8\). So rather than 7 multiplcation steps, we achieved the same result with 3
-steps.</p>
-
-<p>\(2*2 = 4\)</p>
-
-<p>\(4*4 = 16\)</p>
-
-<p>\(16 * 16 = 256\)</p>
-
-<p>This formula is known as the fast exponentiation formula. It brings
+steps.</p><p>\(2*2 = 4\)</p><p>\(4*4 = 16\)</p><p>\(16 * 16 = 256\)</p><p>This formula is known as the fast exponentiation formula. It brings
 exponentiation from a linear runtime to a logarithmic runtime, which halves the
 amount of work every iteration. We can apply the same logic to matrices,
 squaring the matrices every iteration rather than simply multiplying straight
-across. In math notation, this would look something like:</p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^n = \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \left( \begin{array}{ccc} F_{k+1} & F_{k} \\ F_{k} & F_{k-1} \\ \end{array} \right) \]</span></p>
-
-<p><span  class="math">\[ \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right)^{2n} = \left( \begin{array}{ccc} F^2_{k+1} + F^2_{k} & F_{k+1}F_{k} + F_{k}F_{k-1} \\ F_{k+1}F_{k} + F_{k}F_{k-1} & F^2_{k} + F^2_{k-1} \\ \end{array} \right) \]</span></p>
-
-<p>If \(n\) was odd, then we would multiply once more by
-<span  class="math">\( \left( \begin{array}{ccc} 1 & 1 \\ 1 & 0 \\ \end{array} \right) \)</span></p>
-
-<p>Because we halve the work necessary each matrix multiplcation, this qualifies as
-a \(O(log_n)\) implementation. However, that does not mean it's automatically faster
+across. In math notation, this would look something like:</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^n \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^n = \left( \begin{array}{ccc} F_{k+1} & F_{k} \ F_{k} & F_{k-1} \ \end{array} \right) \left( \begin{array}{ccc} F_{k+1} & F_{k} \ F_{k} & F_{k-1} \ \end{array} \right) $$</p><p>$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right)^{2n} = \left( \begin{array}{ccc} F^2_{k+1} + F^2_{k} & F_{k+1}F_{k} + F_{k}F_{k-1} \ F_{k+1}F_{k} + F_{k}F_{k-1} & F^2_{k} + F^2_{k-1} \ \end{array} \right) $$</p><p>If \(n\) was odd, then we would multiply once more by
+$$ \left( \begin{array}{ccc} 1 & 1 \ 1 & 0 \ \end{array} \right) $$</p><p>Because we halve the work necessary each matrix multiplcation, this qualifies as
+a \(O(log_n)\) implementation. However, that does not mean it&rsquo;s automatically faster
 than the linear implementations. Due to the overhead in matrix multiplcation, it
 is actually slower for low values of \(n\), which on my computer was
-\(n&lt;256\).</p>
-
-<p>In terms of memory usage, because we reuse the same matrices, and do not store
+\(n&lt;256\).</p><p>In terms of memory usage, because we reuse the same matrices, and do not store
 all past cached values, the memory usage can be considered linear, with the
-exception of the recursive calls.</p>
-
-<h3 id="benchmarks">Benchmarks</h3>
-
-<p>We test our benchmarks on values \(Fib(n)\), where \(n =
+exception of the recursive calls.</p><h3 id=benchmarks>Benchmarks</h3><p>We test our benchmarks on values \(Fib(n)\), where \(n =
 {1,2,4,8,16,32,64,128,256,512,1024}\) (except for <code>FibTestRecursive</code>, we stop at
-\(n=32\) because any higher values of \(n\) simply takes too long to run).</p>
-
-<p>Here are the benchmarks on for <code>fib</code> on my computer.</p>
-<pre><code>Benchmark Test                        | Iterations | Mean time of operation
+\(n=32\) because any higher values of \(n\) simply takes too long to run).</p><p>Here are the benchmarks on for <code>fib</code> on my computer.</p><pre tabindex=0><code>Benchmark Test                        | Iterations | Mean time of operation
 ---------------------------------------------------------------------------
 BenchmarkFibRecursive1-4                1000000000       2.93 ns/op
 BenchmarkFibRecursive2-4                200000000        7.77 ns/op
@@ -527,55 +266,14 @@ BenchmarkFibPowerMatrixRecursive64-4    20000000          120 ns/op
 BenchmarkFibPowerMatrixRecursive128-4   10000000          142 ns/op
 BenchmarkFibPowerMatrixRecursive256-4   10000000          166 ns/op
 BenchmarkFibPowerMatrixRecursive512-4   10000000          191 ns/op
-BenchmarkFibPowerMatrixRecursive1024-4  10000000          213 ns/op</code></pre>
-<p>The two noteworthy are <code>BenchmarkFibPowerMatrixRecursive1024-8</code> and
+BenchmarkFibPowerMatrixRecursive1024-4  10000000          213 ns/op
+</code></pre><p>The two noteworthy are <code>BenchmarkFibPowerMatrixRecursive1024-8</code> and
 <code>BenchmarkFibIterative1024-8</code>, which clocked in at 213 ns/op and 673 ns/op,
 showing that as \({n\to\infty}\), the \(O(log_n)\) implementation does
 indeed scale better. However, at lower values of \(n\), the iterative
-implementation should still be used.</p>
-
-<h3 id="conclusion">Conclusion</h3>
-
-<p>Well, we've learned to benchmark programs in Go, and tested out real world
+implementation should still be used.</p><h3 id=conclusion>Conclusion</h3><p>Well, we&rsquo;ve learned to benchmark programs in Go, and tested out real world
 implications of complexity analysis. We can achieve real performance gains with
 the fast exponentiation algorithm, but the overhead in calculating matrices
 drags the the runtime for lower orders of \(n\). Thus, it can be advisable in real
 world systems to choose your algorithm depending on the value of \(n\).
-Good algorithms do really matter after all.</p>
-</div>
-
-    
-    
-
-    
-
-    
-
-</main>
-
-        <footer>
-
-            <p class="copyright text-muted">© Terrence Ho 2017-2019</p>
-
-        </footer>
-       
-    </body>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"</script>
-<script> 
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "$$", right: "$$", display: true},
-                {left: "\[", right: "\]", display: true},
-                {left: "$", right: "$", display: false},
-                {left: "\\(", right: "\\)", display: false}
-            ]
-        });
-    });
-</script>
-
-</html>
-
+Good algorithms do really matter after all.</p></div></main><footer><p class="copyright text-muted">© Terrence Ho 2017-2026</p></footer></body><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css integrity=sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js integrity=sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"[",right:"]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script></html>
