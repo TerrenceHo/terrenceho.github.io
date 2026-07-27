@@ -5,18 +5,11 @@
 		<link>http://localhost:1313/tags/job/</link>
 		<description>Recent content in Job on Terrence Ho</description>
 		<generator>Hugo</generator>
-		<language>en-us</language>
+		<language>en</language>
 		
 		
 		
 		
 			<atom:link href="http://localhost:1313/tags/job/index.xml" rel="self" type="application/rss+xml" />
-			<item>
-				<title>My new grad job search and my view on interviews</title>
-				<link>http://localhost:1313/post/new-grad-interview-thoughts/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/post/new-grad-interview-thoughts/</guid>
-				<description>&lt;p&gt;As of November 6th, 2019, I have officially secured a job at Robinhood. Now that&#xA;I have a little more free time, I&amp;rsquo;m going to detail some of my thoughts&#xA;regarding job searches in general.&lt;/p&gt;&#xA;&lt;p&gt;Note that I will go over my relevant thoughts before diving into my personal job&#xA;search story (bragging). Feel free to read the parts only relevant to you.&lt;/p&gt;&#xA;&lt;h2 id=&#34;a-note-on-unfairness&#34;&gt;A note on unfairness&lt;/h2&gt;&#xA;&lt;p&gt;There is undoubtedly variance in job searching. There is luck involved, and&#xA;nothing is guaranteed. This is true overall in life. Ideally, the more effort&#xA;you put in, the greater/better the output.&lt;/p&gt;</description>
-			</item>
 	</channel>
 </rss>
