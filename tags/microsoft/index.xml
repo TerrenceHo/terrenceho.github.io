@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Microsoft on Terrence Ho</title>
+		<link>http://localhost:1313/tags/microsoft/</link>
+		<description>Recent content in Microsoft on Terrence Ho</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost:1313/tags/microsoft/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Microsoft Internship</title>
+				<link>http://localhost:1313/post/microsoft-internship/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/post/microsoft-internship/</guid>
+				<description>&lt;h2 id=&#34;how-i-landed-my-microsoft-internship&#34;&gt;How I landed my Microsoft Internship&lt;/h2&gt;&#xA;&lt;h2 id=&#34;starting-my-internship&#34;&gt;Starting my internship&lt;/h2&gt;&#xA;&lt;p&gt;On July 17th, 2019, I started my Microsoft internship. We registered for I9&#xA;employment, and sat through a bunch of presentations Truthfully, they were&#xA;terribily boring to me, but it&amp;rsquo;s nice to see that the Microsoft recruiters truly&#xA;believe in Microsoft&amp;rsquo;s mission: &lt;em&gt;Empower every person and organization on this&#xA;planet to achieve more.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;camp-microsoft&#34;&gt;Camp Microsoft&lt;/h2&gt;&#xA;&lt;p&gt;Microsoft has started an intern program called Camp Microsoft, which is a&#xA;collection of intern activities and events that help interns get to know one&#xA;another and pass the time. You are put in a random group of other interns, led&#xA;by two Microsoft employees.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
