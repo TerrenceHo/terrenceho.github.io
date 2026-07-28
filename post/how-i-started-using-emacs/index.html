@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>How I Started Using Emacs</title><link rel=icon href=https://terrenceho.dev/favicon.ico><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:0}</style><link rel=stylesheet href=https://terrenceho.dev/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.7/css/all.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/emacs-lisp.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.164.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-86036425-2")</script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>How I Started Using Emacs</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>How I Started Using Emacs</title><link rel=icon href=https://terrenceho.dev/favicon.ico><link rel=preload as=font type=font/woff2 href=/fonts/raleway-latin.b1bef1f03a77a36fc257c5525e32a1dd621bb6f935b743a419da7ed0b18dc8f5.woff2 crossorigin><link rel=stylesheet href=/css/site.min.b4540df51b6ed6743e90a8c6975116126642de43f16a8353b942ccb9b61bdb70.css integrity="sha256-tFQN9Rtu1nQ+kKjGl1EWEmZC3kPxaoNTuULMubYb23A="><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.7/css/all.css integrity=sha384-No+VI8Wwi7LzQn9F3FVzBXMxHH2DQpi1C2B8xrgG/EcPXRuAv1gUo8zA92+F+sEz crossorigin=anonymous><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js integrity=sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.164.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-86036425-2")</script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>How I Started Using Emacs</a>
 <button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
@@ -38,46 +38,46 @@ configure Emacs and various package options. According to the <a href=https://gi
 <code>use-package</code> allows you to &ldquo;isolate package configuration in your .emacs file
 in a way that is both performance-oriented and tidy&rdquo;. It seems to be widely used
 and easy to install, so that&rsquo;s the package manager I settled on. To install
-<code>use-package</code>, open the .emacs file in your home directory and paste this in.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span><span style=color:#75715e>;; Configure package.el to include MELPA.</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>(require <span style=color:#e6db74>&#39;package</span>)
-</span></span><span style=display:flex><span>(add-to-list <span style=color:#e6db74>&#39;package-archives</span> <span style=color:#f92672>&#39;</span>(<span style=color:#e6db74>&#34;melpa&#34;</span> <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;https://melpa.org/packages/&#34;</span>) <span style=color:#66d9ef>t</span>)
-</span></span><span style=display:flex><span>(package-initialize)
+<code>use-package</code>, open the .emacs file in your home directory and paste this in.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=c1>;; Configure package.el to include MELPA.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>require</span> <span class=ss>&#39;package</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>add-to-list</span> <span class=ss>&#39;package-archives</span> <span class=o>&#39;</span><span class=p>(</span><span class=s>&#34;melpa&#34;</span> <span class=o>.</span> <span class=s>&#34;https://melpa.org/packages/&#34;</span><span class=p>)</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>package-initialize</span><span class=p>)</span>
 </span></span></code></pre></div><p>This code (written in ELisp), simply requires <code>package.el</code>, Emacs&rsquo; built in
 package manager. It adds the package archive Melpa to the list of repositories,
 an online repository store of Emacs packages. Melpa seems to be the most
 complete and almost every project is one Melpa, so I only use Melpa. It&rsquo;s
 possible to add more if needed, of course.</p><p>Now that we have initialized the default package manager, we&rsquo;ll use that to
-install <code>use-package</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span><span style=color:#75715e>;; Ensure that use-package is installed.</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; If use-package isn&#39;t already installed, it&#39;s extremely likely that this is a</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; fresh installation! So we&#39;ll want to update the package repository and</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; install use-package before loading the literate configuration.</span>
-</span></span><span style=display:flex><span>(when (not (package-installed-p <span style=color:#e6db74>&#39;use-package</span>))
-</span></span><span style=display:flex><span>  (package-refresh-contents)
-</span></span><span style=display:flex><span>  (package-install <span style=color:#e6db74>&#39;use-package</span>))
+install <code>use-package</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=c1>;; Ensure that use-package is installed.</span>
+</span></span><span class=line><span class=cl><span class=c1>;;</span>
+</span></span><span class=line><span class=cl><span class=c1>;; If use-package isn&#39;t already installed, it&#39;s extremely likely that this is a</span>
+</span></span><span class=line><span class=cl><span class=c1>;; fresh installation! So we&#39;ll want to update the package repository and</span>
+</span></span><span class=line><span class=cl><span class=c1>;; install use-package before loading the literate configuration.</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>not</span> <span class=p>(</span><span class=nv>package-installed-p</span> <span class=ss>&#39;use-package</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>package-refresh-contents</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>package-install</span> <span class=ss>&#39;use-package</span><span class=p>))</span>
 </span></span></code></pre></div><p>Now whenever we want to install some other package, we can use <code>use-package</code> to
 install that package.</p><h2 id=install-evil>Install <code>evil</code></h2><p>Let&rsquo;s use <code>use-package</code> to install <code>evil</code> get join the dark side of Emacs. Paste
-this into your .emacs file.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(use-package evil
-</span></span><span style=display:flex><span>  :config
-</span></span><span style=display:flex><span>  (evil-mode <span style=color:#ae81ff>1</span>))
+this into your .emacs file.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nb>use-package</span> <span class=nv>evil</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:config</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>evil-mode</span> <span class=mi>1</span><span class=p>))</span>
 </span></span></code></pre></div><p><code>use-package</code> searches the package archives for something called <code>evil</code>, sets
 any configurations, and then activates evil mode. Now you can restart Emacs, and
 you should automatically be in <code>evil</code> mode. Try typing some text and editing it
 using the key bindings.</p><p>If you open up your .emacs file again, you can see that emacs generated some
-extra code that looks something like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(custom-set-variables
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; custom-set-variables was added by Custom.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; If you edit it by hand, you could mess it up, so be careful.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; Your init file should contain only one such instance.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; If there is more than one, they won&#39;t work right.</span>
-</span></span><span style=display:flex><span> <span style=color:#f92672>&#39;</span>(package-selected-packages
-</span></span><span style=display:flex><span>   (quote use-package <span style=color:#f92672>...</span>)
-</span></span><span style=display:flex><span>(custom-set-faces
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; custom-set-faces was added by Custom.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; If you edit it by hand, you could mess it up, so be careful.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; Your init file should contain only one such instance.</span>
-</span></span><span style=display:flex><span> <span style=color:#75715e>;; If there is more than one, they won&#39;t work right.</span>
-</span></span><span style=display:flex><span> )
+extra code that looks something like this:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nv>custom-set-variables</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; custom-set-variables was added by Custom.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; If you edit it by hand, you could mess it up, so be careful.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; Your init file should contain only one such instance.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; If there is more than one, they won&#39;t work right.</span>
+</span></span><span class=line><span class=cl> <span class=o>&#39;</span><span class=p>(</span><span class=nv>package-selected-packages</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nb>quote</span> <span class=nb>use-package</span> <span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>custom-set-faces</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; custom-set-faces was added by Custom.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; If you edit it by hand, you could mess it up, so be careful.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; Your init file should contain only one such instance.</span>
+</span></span><span class=line><span class=cl> <span class=c1>;; If there is more than one, they won&#39;t work right.</span>
+</span></span><span class=line><span class=cl> <span class=p>)</span>
 </span></span></code></pre></div><p>This is automatically generated and you shouldn&rsquo;t worry about it. If you
 accidentally ignore the warnings not to mess with it as I did, you can simply
 delete all of it, restart Emacs, and it should be automatically regenerated.</p><p>Now that we have <code>evil</code> mode set up, let&rsquo;s turn to <code>org</code> mode.</p><h2 id=org-mode><code>org</code> mode</h2><p>Now as stated in the beginning, my primary goal was to be able to get started
@@ -87,16 +87,16 @@ later versions, Emacs but if necessary, you can also just install <code>org</cod
 resouces, and a lot of them are quite good, so I&rsquo;m going to list a couple
 resources.</p><ul><li><a href=https://orgmode.org/guide/>Org-mode Guide</a></li><li><a href=https://orgmode.org/worg/>Worg</a></li><li><a href=https://orgmode.org/manual/index.html>Org-mode Manual</a></li></ul><p>I suggest going through the Org-mode guide the most, it has the best concise
 documentation of the most commonly used features.</p><h2 id=configurations-with-org-babel>Configurations with <code>org-babel</code></h2><p>One of the cooler things that <code>org</code> can do is write code blocks inline and
-execute them. Take the Hello World function defined in Python below.</p><p><a id=code-snippet--hello-world></a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> random
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Hello, this is a random number:&#34;</span>, random<span style=color:#f92672>.</span>random())
-</span></span></code></pre></div><p>In an <code>org</code>-file, it would look like this (notice that we name the code block):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+NAME: hello-world
-</span></span><span style=display:flex><span>#+BEGIN_SRC python :results output
-</span></span><span style=display:flex><span>import random
-</span></span><span style=display:flex><span>print(&#34;Hello, this is a random number:&#34;, random.random())
-</span></span><span style=display:flex><span>#+END_SRC
+execute them. Take the Hello World function defined in Python below.</p><p><a id=code-snippet--hello-world></a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Hello, this is a random number:&#34;</span><span class=p>,</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>())</span>
+</span></span></code></pre></div><p>In an <code>org</code>-file, it would look like this (notice that we name the code block):</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+NAME: hello-world
+</span></span><span class=line><span class=cl>#+BEGIN_SRC python :results output
+</span></span><span class=line><span class=cl>import random
+</span></span><span class=line><span class=cl>print(&#34;Hello, this is a random number:&#34;, random.random())
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><p>We can then call that code block by executing it. With your cursor in the
-code-block, press <code>C-c C-c</code>. The output should be as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+RESULTS: hello-world
-</span></span><span style=display:flex><span>: (&#39;Hello, this is a random number:&#39;, 0.35818895069511747)
+code-block, press <code>C-c C-c</code>. The output should be as follows.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+RESULTS: hello-world
+</span></span><span class=line><span class=cl>: (&#39;Hello, this is a random number:&#39;, 0.35818895069511747)
 </span></span></code></pre></div><p>So you can execute arbitrary code in an <code>org</code> mode file. This is obviously very
 cool and also a little dangerous. Always make sure you know what code you&rsquo;re
 executing, because this allows arbitary code execution on your system (this is
@@ -107,7 +107,7 @@ in the same file as your configuration file. You could theoretically do the same
 for any code file using comments, but <code>org</code> mode is just so much more featured
 that it just feels better to write in <code>org</code>.</p><p>In fact, my current configuration file is actually just an <code>org</code> file. My .emacs
 is very minimal. Aside from the code to install <code>use-package</code>, I only have one
-more manually written line:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(org-babel-load-file <span style=color:#e6db74>&#34;~/.emacs.d/configuration.org&#34;</span>)
+more manually written line:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nv>org-babel-load-file</span> <span class=s>&#34;~/.emacs.d/configuration.org&#34;</span><span class=p>)</span>
 </span></span></code></pre></div><p><code>org-babel-load-file</code> parses an org-file, extracts all the code segments, and
 places it into it&rsquo;s own dedicated file that is then executed. so my
 &ldquo;<del>/.emacs.d/configuration.el&rdquo; is generated by <code>org-babel</code> from my
@@ -116,113 +116,113 @@ places it into it&rsquo;s own dedicated file that is then executed. so my
 writing the installation/configuration code in <code>org</code>. You can copy this Emacs
 Lisp code into your own configuration org file. In my configuration <code>org</code> file,
 I always try to comment the code above it, so I know what I did reading it years
-later.</p><p>For reference, my entire .emacs file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span><span style=color:#75715e>;; ===== Custom load definition.</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; ===== Load from configuration org file</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; Configure package.el to include MELPA.</span>
-</span></span><span style=display:flex><span>(require <span style=color:#e6db74>&#39;package</span>)
-</span></span><span style=display:flex><span>(add-to-list <span style=color:#e6db74>&#39;package-archives</span> <span style=color:#f92672>&#39;</span>(<span style=color:#e6db74>&#34;melpa&#34;</span> <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;https://melpa.org/packages/&#34;</span>) <span style=color:#66d9ef>t</span>)
-</span></span><span style=display:flex><span>(package-initialize)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; Ensure that use-package is installed.</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; If use-package isn&#39;t already installed, it&#39;s extremely likely that this is a</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; fresh installation! So we&#39;ll want to update the package repository and</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>;; install use-package before loading the literate configuration.</span>
-</span></span><span style=display:flex><span>(when (not (package-installed-p <span style=color:#e6db74>&#39;use-package</span>))
-</span></span><span style=display:flex><span>  (package-refresh-contents)
-</span></span><span style=display:flex><span>  (package-install <span style=color:#e6db74>&#39;use-package</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>(org-babel-load-file <span style=color:#e6db74>&#34;~/.emacs.d/configuration.org&#34;</span>)
+later.</p><p>For reference, my entire .emacs file:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=c1>;; ===== Custom load definition.</span>
+</span></span><span class=line><span class=cl><span class=c1>;; ===== Load from configuration org file</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>;; Configure package.el to include MELPA.</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>require</span> <span class=ss>&#39;package</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>add-to-list</span> <span class=ss>&#39;package-archives</span> <span class=o>&#39;</span><span class=p>(</span><span class=s>&#34;melpa&#34;</span> <span class=o>.</span> <span class=s>&#34;https://melpa.org/packages/&#34;</span><span class=p>)</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>package-initialize</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>;; Ensure that use-package is installed.</span>
+</span></span><span class=line><span class=cl><span class=c1>;;</span>
+</span></span><span class=line><span class=cl><span class=c1>;; If use-package isn&#39;t already installed, it&#39;s extremely likely that this is a</span>
+</span></span><span class=line><span class=cl><span class=c1>;; fresh installation! So we&#39;ll want to update the package repository and</span>
+</span></span><span class=line><span class=cl><span class=c1>;; install use-package before loading the literate configuration.</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>not</span> <span class=p>(</span><span class=nv>package-installed-p</span> <span class=ss>&#39;use-package</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>package-refresh-contents</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>package-install</span> <span class=ss>&#39;use-package</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>org-babel-load-file</span> <span class=s>&#34;~/.emacs.d/configuration.org&#34;</span><span class=p>)</span>
 </span></span></code></pre></div><h2 id=theme>Theme</h2><p>The theme of your editor could be even more important than the actual editor
 itself. After all, you gotta make your coworkers jealous when they see how cool
-your system looks.</p><p>Personally, I&rsquo;m a fan of the <a href=https://github.com/hlissner/emacs-doom-themes>Doom City Lights Theme</a>.</p><p><a id=figure--fig:doom-city-lights></a></p><figure><img src=https://github.com/hlissner/emacs-doom-themes/raw/screenshots/doom-citylights.png alt="Figure 1: Doom City Lights, courtesy of hlissner"><figcaption><p><span class=figure-number>Figure 1: </span>Doom City Lights, courtesy of <a href=https://github.com/hlissner/emacs-doom-themes>hlissner</a></p></figcaption></figure><p>To install this, paste the following code into your configuration.org file.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(use-package doom-themes
-</span></span><span style=display:flex><span>  :init
-</span></span><span style=display:flex><span>  (load-theme &#39;doom-city-lights t)
-</span></span><span style=display:flex><span>  :config
-</span></span><span style=display:flex><span>  (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
-</span></span><span style=display:flex><span>        doom-themes-enable-italic nil) ; if nil, italics is universally disabled
-</span></span><span style=display:flex><span>  (doom-themes-org-config)
-</span></span><span style=display:flex><span>  )
-</span></span><span style=display:flex><span>#+END_SRC
+your system looks.</p><p>Personally, I&rsquo;m a fan of the <a href=https://github.com/hlissner/emacs-doom-themes>Doom City Lights Theme</a>.</p><p><a id=figure--fig:doom-city-lights></a></p><figure><img src=https://github.com/hlissner/emacs-doom-themes/raw/screenshots/doom-citylights.png alt="Figure 1: Doom City Lights, courtesy of hlissner"><figcaption><p><span class=figure-number>Figure 1: </span>Doom City Lights, courtesy of <a href=https://github.com/hlissner/emacs-doom-themes>hlissner</a></p></figcaption></figure><p>To install this, paste the following code into your configuration.org file.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(use-package doom-themes
+</span></span><span class=line><span class=cl>  :init
+</span></span><span class=line><span class=cl>  (load-theme &#39;doom-city-lights t)
+</span></span><span class=line><span class=cl>  :config
+</span></span><span class=line><span class=cl>  (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
+</span></span><span class=line><span class=cl>        doom-themes-enable-italic nil) ; if nil, italics is universally disabled
+</span></span><span class=line><span class=cl>  (doom-themes-org-config)
+</span></span><span class=line><span class=cl>  )
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h2 id=sane-emacs-configurations>Sane Emacs Configurations</h2><p>A lot of the default configurations for Emacs are a little outdated to say
 the least. <a href=https://github.com/hrs/sensible-defaults.el>sensible-defaults.el</a> is a collection of Emacs configurations that are
 relatively non-intrusive and useful, including:</p><ul><li>Ensuring that files end with newlines,</li><li>Always enabling syntax highlighting,</li><li>Increasing the garbage collection threshold,</li><li>Defaulting line-length to 80 characters,</li><li>Creating parent directories after saving a deeply nested file,</li><li>Making dired file sizes human-readable</li></ul><p>and more. Because they are all exported as several ELisp functions, you can pick
-the ones that you want to use, or simply include all of them by running</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(load &#34;~/code/src/github.com/hrs/sensible-defaults.el/sensible-defaults.el&#34;)
-</span></span><span style=display:flex><span>(sensible-defaults/use-all-settings)
-</span></span><span style=display:flex><span>(sensible-defaults/use-all-keybindings)
-</span></span><span style=display:flex><span>#+END_SRC
+the ones that you want to use, or simply include all of them by running</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(load &#34;~/code/src/github.com/hrs/sensible-defaults.el/sensible-defaults.el&#34;)
+</span></span><span class=line><span class=cl>(sensible-defaults/use-all-settings)
+</span></span><span class=line><span class=cl>(sensible-defaults/use-all-keybindings)
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><p>That&rsquo;s it. I find some of the configurations non-obvious, so I pick and choose
 the ones I want, and add a few of my own custom configurations, but
 sensible-defaults.el is still a good option to look at.</p><h2 id=personal-information>Personal Information</h2><p>This is totally unnecessary, but if you want Emacs to know who you are, then
-set:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span> (setq user-full-name &#34;Terrence Ho&#34;
-</span></span><span style=display:flex><span>       user-mail-address &#34;terrence@thohq.com&#34;)
-</span></span><span style=display:flex><span> #+END_SRC
-</span></span><span style=display:flex><span>#+END_SRC
+set:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl> (setq user-full-name &#34;Terrence Ho&#34;
+</span></span><span class=line><span class=cl>       user-mail-address &#34;terrence@thohq.com&#34;)
+</span></span><span class=line><span class=cl> #+END_SRC
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h2 id=org-todos><code>org</code> TODOs</h2><p>One of the most powerful features of <code>org</code> is it&rsquo;s TODO management. Any line
 starting with several bullet points (Ex: <strong>*</strong>) is a headline. Headlines can
 become TODO items if the first word on the headline is TODO or DONE.</p><p>Let&rsquo;s assume that we want to set more than just TODO/DONE states. I have
 multiple states set up, such as TODO, IN-PROGRESS, WAITING, DONE, and CANCELLED.
 Note that we also want the CANCELLED state to be equivalent to a DONE state,
 since if something is cancelled, we don&rsquo;t want it to be done in the future.
-Adapt the following code according to how you want to set up your TODOs.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(setq org-log-done &#39;time)
-</span></span><span style=display:flex><span>(setq org-todo-keywords
-</span></span><span style=display:flex><span>  &#39;((sequence &#34;TODO(t)&#34; &#34;IN-PROGRESS(i)&#34; &#34;WAITING(w@)&#34; &#34;|&#34; &#34;DONE(d)&#34; &#34;CANCELLED(c@)&#34;)))
-</span></span><span style=display:flex><span>(setq org-todo-keyword-faces
-</span></span><span style=display:flex><span>      &#39;((&#34;TODO&#34; :foreground &#34;red&#34; :weight bold)
-</span></span><span style=display:flex><span>	  (&#34;IN-PROGRESS&#34; :foreground &#34;blue&#34; :weight bold)
-</span></span><span style=display:flex><span>	  (&#34;WAITING&#34; :foreground &#34;orange&#34; :weight bold)
-</span></span><span style=display:flex><span>	  (&#34;DONE&#34; :foreground &#34;forest green&#34; :weight bold)
-</span></span><span style=display:flex><span>	  (&#34;CANCELLED&#34; :foreground &#34;magenta&#34; :weight bold)))
-</span></span><span style=display:flex><span>#+END_SRC
+Adapt the following code according to how you want to set up your TODOs.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(setq org-log-done &#39;time)
+</span></span><span class=line><span class=cl>(setq org-todo-keywords
+</span></span><span class=line><span class=cl>  &#39;((sequence &#34;TODO(t)&#34; &#34;IN-PROGRESS(i)&#34; &#34;WAITING(w@)&#34; &#34;|&#34; &#34;DONE(d)&#34; &#34;CANCELLED(c@)&#34;)))
+</span></span><span class=line><span class=cl>(setq org-todo-keyword-faces
+</span></span><span class=line><span class=cl>      &#39;((&#34;TODO&#34; :foreground &#34;red&#34; :weight bold)
+</span></span><span class=line><span class=cl>	  (&#34;IN-PROGRESS&#34; :foreground &#34;blue&#34; :weight bold)
+</span></span><span class=line><span class=cl>	  (&#34;WAITING&#34; :foreground &#34;orange&#34; :weight bold)
+</span></span><span class=line><span class=cl>	  (&#34;DONE&#34; :foreground &#34;forest green&#34; :weight bold)
+</span></span><span class=line><span class=cl>	  (&#34;CANCELLED&#34; :foreground &#34;magenta&#34; :weight bold)))
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><p>This changes the sequence of TODO states, adding the necessary states. Notice
 the &ldquo;@&rdquo; in the CANCELLED and WAITING states: they indicate that we can add a
 note explaining what an item is waiting for or why something was cancelled.</p><p><code>org</code> by default allows you to switch states by pressing <code>S-LEFT</code> pr <code>S-RIGHT</code>.
 However, when we have multiple states, we often want to switch directly to the
-desired state. Add the following code to enable this option.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(setq org-use-fast-todo-selection t)
-</span></span><span style=display:flex><span>#+END_SRC
+desired state. Add the following code to enable this option.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(setq org-use-fast-todo-selection t)
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><p>To switch TODO states, place your cursor onto the headline, then press <code>C-c C-t</code>. This should bring up another buffer listing the possible states. Press the
 key corresponding to your desired state, and your headline should automatically
 change to reflect that.</p><h2 id=org-ellipsis><code>org</code> ellipsis</h2><p>When you are hovering over a headline, you can press <code>TAB</code>. This collapses all
 the text underneath the headline, and replaces the text with an ellipsis (&mldr;).
-I didn&rsquo;t like the ellipsis, so I replaced it with a &ldquo;⤵&rdquo;.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(setq org-ellipsis &#34;⤵&#34;)
-</span></span><span style=display:flex><span>(set-face-attribute &#39;org-ellipsis nil :foreground &#34;##61a49e&#34;)
-</span></span><span style=display:flex><span>#+END_SRC
+I didn&rsquo;t like the ellipsis, so I replaced it with a &ldquo;⤵&rdquo;.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(setq org-ellipsis &#34;⤵&#34;)
+</span></span><span class=line><span class=cl>(set-face-attribute &#39;org-ellipsis nil :foreground &#34;##61a49e&#34;)
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h2 id=org-pretty-bullets><code>org</code> pretty bullets</h2><p>The number of the bullets in your headline indicates different levels of
 headlines, and they correspond to different importance levels (* matches to
 <code>&lt;h1></code>, ** matches to <code>&lt;h2></code>, etc). I&rsquo;d prefer to look at some prettier,
-indented bullets, so I replaced them with a package called <code>org-bullets</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>  (use-package org-bullets
-</span></span><span style=display:flex><span>    :init
-</span></span><span style=display:flex><span>    (add-hook &#39;org-mode-hook &#39;org-bullets-mode))
-</span></span><span style=display:flex><span>#+END_SRC
+indented bullets, so I replaced them with a package called <code>org-bullets</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>  (use-package org-bullets
+</span></span><span class=line><span class=cl>    :init
+</span></span><span class=line><span class=cl>    (add-hook &#39;org-mode-hook &#39;org-bullets-mode))
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h2 id=org-file-converters><code>org</code> file converters</h2><p><code>org</code> can export to a bunch of different file systems. I&rsquo;ll go over the formats
 I have set up, but in the future if you need to write a paper and transform it
 into PDF or HTML format, consider writing in <code>org</code> rather than LaTex (powerful
 but annoying to write) or Markdown (non-standardized and Markdown tables suck).</p><p>To convert a file, press <code>C-c C-e</code>. This should being up a side panel listing a
 bunch of options to convert your files. Choose which file format to convert to,
-and Emacs should output that file.</p><h3 id=html-markdown>HTML/Markdown</h3><p><code>htmlize</code> is a package that helps you convert <code>org</code> files to an HTML page.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>   (use-package htmlize)
-</span></span><span style=display:flex><span>#+END_SRC
+and Emacs should output that file.</p><h3 id=html-markdown>HTML/Markdown</h3><p><code>htmlize</code> is a package that helps you convert <code>org</code> files to an HTML page.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>   (use-package htmlize)
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h3 id=pdf-latex>PDF/LaTex</h3><p><code>org</code> can export to PDF thorugh LaTex if you have a Tex toolchain available on
 your system automatically.</p><h3 id=github-flavored-markdown>GitHub Flavored Markdown</h3><p>GitHub has it&rsquo;s own flavour of markdown. Well no matter, we can export to that
-too. Never directly write a README.md directly again!</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(use-package ox-gfm)
-</span></span><span style=display:flex><span>(eval-after-load &#34;org&#34;
-</span></span><span style=display:flex><span>  &#39;(require &#39;ox-gfm nil t))
-</span></span><span style=display:flex><span>#+END_SRC
+too. Never directly write a README.md directly again!</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(use-package ox-gfm)
+</span></span><span class=line><span class=cl>(eval-after-load &#34;org&#34;
+</span></span><span class=line><span class=cl>  &#39;(require &#39;ox-gfm nil t))
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h3 id=hugo>Hugo</h3><p>This blog is generated with Hugo. I can write my blog posts in <code>org</code>, export
-them to hugo compatible Markdown with front-matter intact, and publish them.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+BEGIN_SRC emacs-lisp
-</span></span><span style=display:flex><span>(use-package ox-hugo
-</span></span><span style=display:flex><span>  :ensure t            ;Auto-install the package from Melpa (optional)
-</span></span><span style=display:flex><span>  :after ox)
-</span></span><span style=display:flex><span>#+END_SRC
+them to hugo compatible Markdown with front-matter intact, and publish them.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+BEGIN_SRC emacs-lisp
+</span></span><span class=line><span class=cl>(use-package ox-hugo
+</span></span><span class=line><span class=cl>  :ensure t            ;Auto-install the package from Melpa (optional)
+</span></span><span class=line><span class=cl>  :after ox)
+</span></span><span class=line><span class=cl>#+END_SRC
 </span></span></code></pre></div><h2 id=conclusion>Conclusion</h2><p>My journey into Emacs and Org-Mode has been quite successful. To demonstrate,
 I&rsquo;ve written this blog post using <code>org</code>, and I hopefully plan on never writing
 Markdown again. My current, ever updating configuration file can be seen at

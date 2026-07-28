@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Writing My Blog Posts with Org</title><link rel=icon href=https://terrenceho.dev/favicon.ico><style>html body{font-family:raleway,sans-serif;background-color:#fff}:root{--accent:red;--border-width:0}</style><link rel=stylesheet href=https://terrenceho.dev/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Raleway"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.7/css/all.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/emacs-lisp.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.164.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-86036425-2")</script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Writing My Blog Posts with Org</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Writing My Blog Posts with Org</title><link rel=icon href=https://terrenceho.dev/favicon.ico><link rel=preload as=font type=font/woff2 href=/fonts/raleway-latin.b1bef1f03a77a36fc257c5525e32a1dd621bb6f935b743a419da7ed0b18dc8f5.woff2 crossorigin><link rel=stylesheet href=/css/site.min.b4540df51b6ed6743e90a8c6975116126642de43f16a8353b942ccb9b61bdb70.css integrity="sha256-tFQN9Rtu1nQ+kKjGl1EWEmZC3kPxaoNTuULMubYb23A="><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.0.7/css/all.css integrity=sha384-No+VI8Wwi7LzQn9F3FVzBXMxHH2DQpi1C2B8xrgG/EcPXRuAv1gUo8zA92+F+sEz crossorigin=anonymous><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js integrity=sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on("click",function(){$(".collapse").collapse("hide")})</script><meta name=generator content="Hugo 0.164.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-86036425-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-86036425-2")</script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Writing My Blog Posts with Org</a>
 <button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
@@ -15,39 +15,39 @@ to your liking. (What&rsquo;s an extension without spending a couple hours of li
 figuring out exactly how to make it conform to your workflow in the pursuit of
 &ldquo;optimization&rdquo;). This is how I configure <code>ox-hugo</code> to write all my blog posts
 (including this blog post!).</p><h2 id=setup>Setup</h2><h3 id=installation>Installation</h3><p>Install the package <a href=https://ox-hugo.scripter.co/><code>ox-hugo</code></a>. If you use <code>use-package</code> to manage your packages,
-the following snippet should do the trick.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-emacs-lisp data-lang=emacs-lisp><span style=display:flex><span>(use-package ox-hugo
-</span></span><span style=display:flex><span>  :ensure <span style=color:#66d9ef>t</span>            <span style=color:#75715e>;Auto-install the package from Melpa (optional)</span>
-</span></span><span style=display:flex><span>  :after ox)
+the following snippet should do the trick.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nb>use-package</span> <span class=nv>ox-hugo</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:ensure</span> <span class=no>t</span>            <span class=c1>;Auto-install the package from Melpa (optional)</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:after</span> <span class=nv>ox</span><span class=p>)</span>
 </span></span></code></pre></div><p>I would recommend going through <code>ox-hugo</code>&rsquo;s documentation for maximum
 effectiveness.</p><h3 id=base-directory>Base Directory</h3><p>In a Hugo website, you might have a directory structure that looks the following
-layout. From now on, we will refer to this root directory as <code>HUGO_ROOT_DIR</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>.
-</span></span><span style=display:flex><span>├── config.toml
-</span></span><span style=display:flex><span>├── content
-</span></span><span style=display:flex><span>│   └── post
-</span></span><span style=display:flex><span>│       ├── post1.md
-</span></span><span style=display:flex><span>│       ├── new-post.md
-</span></span><span style=display:flex><span>├── content_org
-</span></span><span style=display:flex><span>│   └── post.org
-</span></span><span style=display:flex><span>├── layouts
-</span></span><span style=display:flex><span>│   └── partials
-</span></span><span style=display:flex><span>├── public
-</span></span><span style=display:flex><span>│   ├── content
-</span></span><span style=display:flex><span>│   │   └── post
+layout. From now on, we will refer to this root directory as <code>HUGO_ROOT_DIR</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── config.toml
+</span></span><span class=line><span class=cl>├── content
+</span></span><span class=line><span class=cl>│   └── post
+</span></span><span class=line><span class=cl>│       ├── post1.md
+</span></span><span class=line><span class=cl>│       ├── new-post.md
+</span></span><span class=line><span class=cl>├── content_org
+</span></span><span class=line><span class=cl>│   └── post.org
+</span></span><span class=line><span class=cl>├── layouts
+</span></span><span class=line><span class=cl>│   └── partials
+</span></span><span class=line><span class=cl>├── public
+</span></span><span class=line><span class=cl>│   ├── content
+</span></span><span class=line><span class=cl>│   │   └── post
 </span></span></code></pre></div><p>Note that I have only shown the necessary parts, your actual directory structure
 will have many other files. <code>org</code> doesn&rsquo;t care about Hugo&rsquo;s directory structure,
 so I added a new directory called <code>content-org</code>. This is where I store all my
 <code>org</code> files for the blogs. We only need one <code>org</code> file, named post.org.</p><h3 id=global-properties>Global Properties</h3><p>Open up <code>$(HUGO_ROOT_DIR)/content_org/post.org</code> in Emacs. At the very top,
-insert the following (replace <code>&lt;your-name=here></code> with your name).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+AUTHOR: &lt;your-name-here&gt;
-</span></span><span style=display:flex><span>#+HUGO_BASE_DIR: ../
+insert the following (replace <code>&lt;your-name=here></code> with your name).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+AUTHOR: &lt;your-name-here&gt;
+</span></span><span class=line><span class=cl>#+HUGO_BASE_DIR: ../
 </span></span></code></pre></div><p>This sets the author to be your name, and more importantly sets where
 <code>$(HUGO_ROOT_DIR)</code> is located at. In this case, the root directory is simply the
 parent directory. If your root directory is elsewhere, adjust <code>HUGO_BASE_DIR</code>
 appropriately. Setting <code>HUGO_BASE_DIR</code> is necessary for <code>ox-hugo</code> to set where
-it will be exporting files.</p><p>Next, create a headline called Posts. Underneath, add the following properties.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>* Posts
-</span></span><span style=display:flex><span>:PROPERTIES:
-</span></span><span style=display:flex><span>:EXPORT_HUGO_SECTION: post
-</span></span><span style=display:flex><span>:EXPORT_HUGO_CUSTOM_FRONT_MATTER:
-</span></span><span style=display:flex><span>:END:
+it will be exporting files.</p><p>Next, create a headline called Posts. Underneath, add the following properties.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>* Posts
+</span></span><span class=line><span class=cl>:PROPERTIES:
+</span></span><span class=line><span class=cl>:EXPORT_HUGO_SECTION: post
+</span></span><span class=line><span class=cl>:EXPORT_HUGO_CUSTOM_FRONT_MATTER:
+</span></span><span class=line><span class=cl>:END:
 </span></span></code></pre></div><p><code>EXPORT_HUGO_SECTION</code> sets the directory under content to generate blog posts.
 Here we&rsquo;ve set the export directory to be post, which corresponds to
 <code>$(HUGO_ROOT_DIR)/content/post</code>. Under <code>EXPORT_HUGO_CUSTOM_FRONT_MATTER</code>, you
@@ -65,10 +65,10 @@ can even mark a blog post as DONE to &ldquo;release&rdquo; it. Below is an examp
 collapsed view of the Posts tree. There are three blog posts, with one marked
 as DONE, and the rest TODO or IN-PROGRESS. (To collapse a subtree in <code>org-mode</code>,
 press <code>S-TAB</code>. You can then press <code>TAB</code> on the POSTS headline to see
-sub-headlines underneath it.)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>* Posts
-</span></span><span style=display:flex><span>** TODO Go Essentials Part 1                               :go:go_essentials:⤵
-</span></span><span style=display:flex><span>** IN-PROGRESS Microsoft Internship                    :microsoft:internship:⤵
-</span></span><span style=display:flex><span>** DONE How I started Using Emacs                                 :emcas:org:⤵
+sub-headlines underneath it.)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>* Posts
+</span></span><span class=line><span class=cl>** TODO Go Essentials Part 1                               :go:go_essentials:⤵
+</span></span><span class=line><span class=cl>** IN-PROGRESS Microsoft Internship                    :microsoft:internship:⤵
+</span></span><span class=line><span class=cl>** DONE How I started Using Emacs                                 :emcas:org:⤵
 </span></span></code></pre></div><p>Thus in a nutshell, we have the Posts top level headline, then TODO items as
 secondary headlines. Each TODO item is a blog post, either finished or
 unfinished. Any content underneath the secondary headlines is part of the actual
@@ -76,11 +76,11 @@ blog post. In the snippet above, I have collapsed the content, leaving only a �
 to indicate there is data underneath the headline. All your blog posts live
 under the Posts subtree. So anytime you want to edit a blog post, you open
 <code>$(HUGO_ROOT_DIR)/content_org/post.org</code> and edit the appropriate subtree.</p><h3 id=blog-properties>Blog Properties</h3><p>We also want to be able to add some properties to an individual blog post. We
-can do so like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>* Posts
-</span></span><span style=display:flex><span>** TODO Next Blog Post
-</span></span><span style=display:flex><span>:PROPERTIES:
-</span></span><span style=display:flex><span>:EXPORT_FILE_NAME: how-i-started-using-emacs
-</span></span><span style=display:flex><span>:END:
+can do so like this:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>* Posts
+</span></span><span class=line><span class=cl>** TODO Next Blog Post
+</span></span><span class=line><span class=cl>:PROPERTIES:
+</span></span><span class=line><span class=cl>:EXPORT_FILE_NAME: how-i-started-using-emacs
+</span></span><span class=line><span class=cl>:END:
 </span></span></code></pre></div><p>This sets the file name to be exported to. There are other properties you can
 set, all detailed in the <code>ox-hugo</code> docs. All the properties are translated to
 Hugo YAML front-matter. In this fashion, <code>ox-hugo</code> allows you to set file
@@ -88,8 +88,8 @@ specific YAML front-matter in an <code>org-mode</code>-like way.</p><h3 id=tags>
 tags in each blog headline such as the following. This saves you the trouble of
 having to write the tabs into the <code>PROPERTIES</code> themselves, since that is
 slightly more troublesome. Additionally, this makes use of <code>org-mode</code> tags,
-allowing <code>org-mode</code> to format your tags nicely.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>* Posts
-</span></span><span style=display:flex><span>** TODO Next Blog Post                                           :tag1:tag2:
+allowing <code>org-mode</code> to format your tags nicely.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>* Posts
+</span></span><span class=line><span class=cl>** TODO Next Blog Post                                           :tag1:tag2:
 </span></span></code></pre></div><p>These tags allow you to group related posts. Hugo can read these tags and link
 all blog posts with the same tags, so this is a very neat feature.</p><h3 id=publishing-a-blog-post>Publishing a Blog Post</h3><p>To publish a blog post, set the blog post from TODO to DONE. (For those new to
 <code>org-mode</code>, you can do this by pressing <code>C-c C-t</code>. This should bring up a side
@@ -101,31 +101,31 @@ section below.</p><h3 id=putting-it-all-together>Putting it all together</h3><p>
 and one unfinished. The finished blog post has a CLOSED timestamp indicating the
 date at which it was finsihed. The unfinished blog post is considered a draft to
 Hugo, and so Hugo won&rsquo;t compile that blog post unless Hugo is set to compile the
-drafts as well.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>#+AUTHOR: Terrence Ho
-</span></span><span style=display:flex><span>#+HUGO_BASE_DIR: ../
-</span></span><span style=display:flex><span>* Posts
-</span></span><span style=display:flex><span>** TODO Next Blog Post
-</span></span><span style=display:flex><span>:PROPERTIES:
-</span></span><span style=display:flex><span>:EXPORT_FILE_NAME: next-blog-post-name
-</span></span><span style=display:flex><span>:END:
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>Introductory text... Ipsum Lorem
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>*** First Headline
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>More text... Ipsum Lorem
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>**** First Sub-Headline
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>Even more text... Ipsum Lorem
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>** DONE Other Finished Blog Post
-</span></span><span style=display:flex><span>   CLOSED: [2019-06-17 Mon 16:53]
-</span></span><span style=display:flex><span>:PROPERTIES:
-</span></span><span style=display:flex><span>:EXPORT_FILE_NAME: other-finished-blog-post
-</span></span><span style=display:flex><span>:END:
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>This blog post was finished one Monday, June 17th, 2019.
+drafts as well.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>#+AUTHOR: Terrence Ho
+</span></span><span class=line><span class=cl>#+HUGO_BASE_DIR: ../
+</span></span><span class=line><span class=cl>* Posts
+</span></span><span class=line><span class=cl>** TODO Next Blog Post
+</span></span><span class=line><span class=cl>:PROPERTIES:
+</span></span><span class=line><span class=cl>:EXPORT_FILE_NAME: next-blog-post-name
+</span></span><span class=line><span class=cl>:END:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Introductory text... Ipsum Lorem
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*** First Headline
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>More text... Ipsum Lorem
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>**** First Sub-Headline
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Even more text... Ipsum Lorem
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>** DONE Other Finished Blog Post
+</span></span><span class=line><span class=cl>   CLOSED: [2019-06-17 Mon 16:53]
+</span></span><span class=line><span class=cl>:PROPERTIES:
+</span></span><span class=line><span class=cl>:EXPORT_FILE_NAME: other-finished-blog-post
+</span></span><span class=line><span class=cl>:END:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This blog post was finished one Monday, June 17th, 2019.
 </span></span></code></pre></div><h2 id=converting-to-markdown>Converting to Markdown</h2><p>Lastly, once all this is set up, we will want to convert out posts to Markdown
 files. Luckily, <code>ox-hugo</code> also builds in an exporter to complement <code>org-mode</code>&rsquo;s
 exporting capabilities.</p><p>To export a subtree as a post, press <code>C-c C-e</code>. This should bring up a side menu
